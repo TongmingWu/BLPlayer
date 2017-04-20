@@ -3,11 +3,12 @@ package com.tm.blplayer.network;
 import android.content.Context;
 
 import com.tm.blplayer.BLApplication;
-import com.tm.blplayer.bean.BangumiDetailBean;
-import com.tm.blplayer.bean.BangumiListBean;
-import com.tm.blplayer.bean.HomeBean;
-import com.tm.blplayer.bean.VideoDetailBean;
-import com.tm.blplayer.bean.VideoListBean;
+import com.tm.blplayer.bean.BangumiDetailData;
+import com.tm.blplayer.bean.BangumiListData;
+import com.tm.blplayer.bean.BaseBean;
+import com.tm.blplayer.bean.HomeData;
+import com.tm.blplayer.bean.VideoDetailData;
+import com.tm.blplayer.bean.VideoListData;
 import com.tm.blplayer.url.PrefixUrl;
 import com.tm.blplayer.utils.CommonUtil;
 import com.tm.blplayer.utils.constants.Constants;
@@ -111,42 +112,42 @@ public class ApiManager {
     /**
      * 获取首页推荐数据
      */
-    public Observable<HomeBean> getHomeData() {
+    public Observable<BaseBean<HomeData>> getHomeData() {
         return apiService.getHome();
     }
 
     /**
      * 获取视频具体信息
      */
-    public Observable<VideoDetailBean> getVideoDetail(String aid) {
+    public Observable<BaseBean<VideoDetailData>> getVideoDetail(String aid) {
         return apiService.getVideoDetail(aid);
     }
 
     /**
      * 获取国创时间表
      */
-    public Observable<BangumiListBean> getGuochuangTimeline() {
+    public Observable<BaseBean<BangumiListData>> getGuochuangTimeline() {
         return apiService.getGuochuangTimeline();
     }
 
     /**
      * 获取番剧时间表
      */
-    public Observable<BangumiListBean> getBangumiTimeline() {
+    public Observable<BaseBean<BangumiListData>> getBangumiTimeline() {
         return apiService.getBangumiTimeline();
     }
 
     /**
      * 获取番剧具体信息
      */
-    public Observable<BangumiDetailBean> getBangumiDetail(String sid) {
+    public Observable<BaseBean<BangumiDetailData>> getBangumiDetail(String sid) {
         return apiService.getBangumiDetailData(sid);
     }
 
     /**
      * 搜索
      */
-    public Observable<VideoListBean> doSearch(String word, int page, String order) {
+    public Observable<BaseBean<VideoListData>> doSearch(String word, int page, String order) {
         return apiService.doSearch(word, page, order);
     }
 
