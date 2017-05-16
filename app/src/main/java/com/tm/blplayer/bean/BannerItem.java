@@ -1,6 +1,7 @@
 package com.tm.blplayer.bean;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * @author wutongming
@@ -8,10 +9,7 @@ import java.io.Serializable;
  * @since 2017/4/17
  */
 
-public class BannerItem implements Serializable {
-
-    private static final long serialVersionUID = 8005307762635507902L;
-
+public class BannerItem implements Parcelable {
     /**
      * area : 0
      * id : 42363
@@ -87,4 +85,43 @@ public class BannerItem implements Serializable {
                 ", url='" + url + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.area);
+        dest.writeInt(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.pic);
+        dest.writeInt(this.style);
+        dest.writeString(this.url);
+    }
+
+    public BannerItem() {
+    }
+
+    protected BannerItem(Parcel in) {
+        this.area = in.readInt();
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.pic = in.readString();
+        this.style = in.readInt();
+        this.url = in.readString();
+    }
+
+    public static final Parcelable.Creator<BannerItem> CREATOR = new Parcelable.Creator<BannerItem>() {
+        @Override
+        public BannerItem createFromParcel(Parcel source) {
+            return new BannerItem(source);
+        }
+
+        @Override
+        public BannerItem[] newArray(int size) {
+            return new BannerItem[size];
+        }
+    };
 }

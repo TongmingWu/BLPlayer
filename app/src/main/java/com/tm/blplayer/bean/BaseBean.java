@@ -1,16 +1,12 @@
 package com.tm.blplayer.bean;
 
-import java.io.Serializable;
-
 /**
  * @author wutongming
  * @description
  * @since 2017/4/17
  */
 
-public class BaseBean<T> implements Serializable {
-
-    private static final long serialVersionUID = -298585903516636539L;
+public class BaseBean<T> {
 
     private int code;
     private String message;

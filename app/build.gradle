@@ -90,12 +90,18 @@ dependencies {
     //required, enough for most devices.
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.7.9'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.7.9'
+    // Other ABIs: optional
+    compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.7.9'
+    compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.7.9'
     // ExoPlayer as IMediaPlayer
     compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.7.9'
 
     //弹幕
     compile 'com.github.ctiao:DanmakuFlameMaster:0.7.4'
     compile 'com.github.ctiao:ndkbitmap-armv7a:0.7.4'
+    // Other ABIs: optional
+    compile 'com.github.ctiao:ndkbitmap-armv5:0.8.3'
+    compile 'com.github.ctiao:ndkbitmap-x86:0.8.3'
 
     //logger
     compile 'com.orhanobut:logger:1.15'

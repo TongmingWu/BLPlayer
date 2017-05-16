@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.tm.blplayer.R;
+import com.tm.blplayer.mvp.presenter.BasePresenter;
+import com.tm.blplayer.mvp.view.BaseView;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import butterknife.BindView;
@@ -24,6 +26,8 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends RxAppCompatActivity {
 
     private Unbinder bind;
+
+    protected BasePresenter<BaseView> presenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -102,9 +106,12 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         if (bind != null) {
             bind.unbind();
         }
+        if (presenter != null) {
+            presenter.onDetach();
+        }
+        super.onDestroy();
     }
 }

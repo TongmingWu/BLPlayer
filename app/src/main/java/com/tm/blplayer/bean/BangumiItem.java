@@ -1,8 +1,9 @@
 package com.tm.blplayer.bean;
 
-import com.google.gson.annotations.SerializedName;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.io.Serializable;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * @author wutongming
@@ -10,9 +11,7 @@ import java.io.Serializable;
  * @since 2017/4/17
  */
 
-public class BangumiItem implements Serializable {
-
-    private static final long serialVersionUID = 6556891700470501268L;
+public class BangumiItem implements Parcelable {
 
     /**
      * area : 日本
@@ -276,4 +275,77 @@ public class BangumiItem implements Serializable {
                 ", weekday=" + weekday +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.area);
+        dest.writeInt(this.arealimit);
+        dest.writeInt(this.attention);
+        dest.writeString(this.badge);
+        dest.writeInt(this.bangumi_id);
+        dest.writeString(this.bgmcount);
+        dest.writeString(this.cover);
+        dest.writeInt(this.danmaku_count);
+        dest.writeInt(this.ep_id);
+        dest.writeInt(this.favorites);
+        dest.writeInt(this.is_finish);
+        dest.writeInt(this.lastupdate);
+        dest.writeString(this.lastupdate_at);
+        dest.writeByte(this.newest ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.play_count);
+        dest.writeString(this.pub_time);
+        dest.writeInt(this.season_id);
+        dest.writeInt(this.season_status);
+        dest.writeInt(this.spid);
+        dest.writeString(this.square_cover);
+        dest.writeString(this.title);
+        dest.writeInt(this.viewRank);
+        dest.writeInt(this.weekday);
+    }
+
+    public BangumiItem() {
+    }
+
+    protected BangumiItem(Parcel in) {
+        this.area = in.readString();
+        this.arealimit = in.readInt();
+        this.attention = in.readInt();
+        this.badge = in.readString();
+        this.bangumi_id = in.readInt();
+        this.bgmcount = in.readString();
+        this.cover = in.readString();
+        this.danmaku_count = in.readInt();
+        this.ep_id = in.readInt();
+        this.favorites = in.readInt();
+        this.is_finish = in.readInt();
+        this.lastupdate = in.readInt();
+        this.lastupdate_at = in.readString();
+        this.newest = in.readByte() != 0;
+        this.play_count = in.readInt();
+        this.pub_time = in.readString();
+        this.season_id = in.readInt();
+        this.season_status = in.readInt();
+        this.spid = in.readInt();
+        this.square_cover = in.readString();
+        this.title = in.readString();
+        this.viewRank = in.readInt();
+        this.weekday = in.readInt();
+    }
+
+    public static final Parcelable.Creator<BangumiItem> CREATOR = new Parcelable.Creator<BangumiItem>() {
+        @Override
+        public BangumiItem createFromParcel(Parcel source) {
+            return new BangumiItem(source);
+        }
+
+        @Override
+        public BangumiItem[] newArray(int size) {
+            return new BangumiItem[size];
+        }
+    };
 }

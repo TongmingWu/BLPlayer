@@ -2,10 +2,12 @@ package com.tm.blplayer.network;
 
 import android.content.Context;
 
+import com.orhanobut.logger.Logger;
 import com.tm.blplayer.BLApplication;
 import com.tm.blplayer.bean.BangumiDetailData;
 import com.tm.blplayer.bean.BangumiListData;
 import com.tm.blplayer.bean.BaseBean;
+import com.tm.blplayer.bean.CategoryListData;
 import com.tm.blplayer.bean.HomeData;
 import com.tm.blplayer.bean.VideoDetailData;
 import com.tm.blplayer.bean.VideoListData;
@@ -16,6 +18,7 @@ import com.tm.blplayer.utils.constants.PathConstants;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -31,7 +34,7 @@ import rx.Observable;
 
 /**
  * @author wutongming
- * @description
+ * @description api管理器
  * @since 2017/4/17
  */
 
@@ -72,6 +75,7 @@ public class ApiManager {
             mOkHttpClient = new OkHttpClient.Builder()
                     .cache(cache)
                     .addInterceptor(mRewriteCacheControlInterceptor)
+                    .addInterceptor(new LogInterceptor())
                     .addNetworkInterceptor(mRewriteCacheControlInterceptor)
                     .retryOnConnectionFailure(true)
                     .connectTimeout(15, TimeUnit.SECONDS)
@@ -108,6 +112,28 @@ public class ApiManager {
         }
     };
 
+    /**
+     * 日志拦截器,用于联网记录日志打印
+     */
+    private static class LogInterceptor implements Interceptor {
+        @Override
+        public okhttp3.Response intercept(Chain chain) throws IOException {
+            Request request = chain.request();
+            Logger.d("request:" + request.toString());
+            long t1 = System.nanoTime();
+            okhttp3.Response response = chain.proceed(chain.request());
+            long t2 = System.nanoTime();
+            Logger.d(String.format(Locale.getDefault(), "Received response for %s in %.1fms%n%s",
+                    response.request().url(), (t2 - t1) / 1e6d, response.headers()));
+            okhttp3.MediaType mediaType = response.body().contentType();
+            String content = response.body().string();
+            Logger.d("response body:" + content);
+            return response.newBuilder()
+                    .body(okhttp3.ResponseBody.create(mediaType, content))
+                    .build();
+        }
+    }
+
 
     /**
      * 获取首页推荐数据
@@ -118,6 +144,8 @@ public class ApiManager {
 
     /**
      * 获取视频具体信息
+     *
+     * @param aid 视频id
      */
     public Observable<BaseBean<VideoDetailData>> getVideoDetail(String aid) {
         return apiService.getVideoDetail(aid);
@@ -139,6 +167,8 @@ public class ApiManager {
 
     /**
      * 获取番剧具体信息
+     *
+     * @param sid 番剧id --> season_id
      */
     public Observable<BaseBean<BangumiDetailData>> getBangumiDetail(String sid) {
         return apiService.getBangumiDetailData(sid);
@@ -146,10 +176,38 @@ public class ApiManager {
 
     /**
      * 搜索
+     *
+     * @param word  关键字
+     * @param page  当前页数
+     * @param order 排列顺序
      */
     public Observable<BaseBean<VideoListData>> doSearch(String word, int page, String order) {
         return apiService.doSearch(word, page, order);
     }
 
+    /**
+     * 获取分类表
+     */
+    public Observable<BaseBean<CategoryListData>> getCategoryOrder() {
+        return apiService.getCategoryOrder();
+    }
 
+    /**
+     * 获取一级分类信息
+     *
+     * @param firstTid 一级分类 如动画
+     */
+    public Observable<BaseBean<?>> getCategoryInfo(String firstTid) {
+        return apiService.getCategoryInfo(firstTid);
+    }
+
+    /**
+     * 获取一级分类信息
+     *
+     * @param firstTid  一级分类 如动画
+     * @param secondTid 二级分类 如MAD
+     */
+    public Observable<BaseBean<?>> getCategoryInfo(String firstTid, String secondTid) {
+        return apiService.getCategoryInfo(firstTid, secondTid);
+    }
 }

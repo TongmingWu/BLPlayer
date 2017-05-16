@@ -1,6 +1,7 @@
 package com.tm.blplayer.bean;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * @author wutongming
@@ -8,9 +9,7 @@ import java.io.Serializable;
  * @since 2017/4/17
  */
 
-public class VideoItem implements Serializable{
-
-    private static final long serialVersionUID = 8718854821595941008L;
+public class VideoItem implements Parcelable {
 
     /**
      * aid : 9901898
@@ -208,4 +207,65 @@ public class VideoItem implements Serializable{
                 ", video_review=" + video_review +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.aid);
+        dest.writeString(this.author);
+        dest.writeInt(this.coins);
+        dest.writeString(this.create);
+        dest.writeInt(this.credit);
+        dest.writeString(this.description);
+        dest.writeString(this.duration);
+        dest.writeInt(this.favorites);
+        dest.writeInt(this.mid);
+        dest.writeString(this.pic);
+        dest.writeInt(this.play);
+        dest.writeString(this.pubdate);
+        dest.writeInt(this.review);
+        dest.writeString(this.subtitle);
+        dest.writeString(this.title);
+        dest.writeInt(this.typeid);
+        dest.writeInt(this.video_review);
+    }
+
+    public VideoItem() {
+    }
+
+    protected VideoItem(Parcel in) {
+        this.aid = in.readInt();
+        this.author = in.readString();
+        this.coins = in.readInt();
+        this.create = in.readString();
+        this.credit = in.readInt();
+        this.description = in.readString();
+        this.duration = in.readString();
+        this.favorites = in.readInt();
+        this.mid = in.readInt();
+        this.pic = in.readString();
+        this.play = in.readInt();
+        this.pubdate = in.readString();
+        this.review = in.readInt();
+        this.subtitle = in.readString();
+        this.title = in.readString();
+        this.typeid = in.readInt();
+        this.video_review = in.readInt();
+    }
+
+    public static final Parcelable.Creator<VideoItem> CREATOR = new Parcelable.Creator<VideoItem>() {
+        @Override
+        public VideoItem createFromParcel(Parcel source) {
+            return new VideoItem(source);
+        }
+
+        @Override
+        public VideoItem[] newArray(int size) {
+            return new VideoItem[size];
+        }
+    };
 }

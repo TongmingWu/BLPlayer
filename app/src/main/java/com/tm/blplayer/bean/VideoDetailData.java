@@ -1,6 +1,9 @@
 package com.tm.blplayer.bean;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,9 +12,7 @@ import java.util.List;
  * @since 2017/4/17
  */
 
-public class VideoDetailData implements Serializable {
-
-    private static final long serialVersionUID = 3071341449411812551L;
+public class VideoDetailData implements Parcelable {
 
     /**
      * author_info : {"card":{"DisplayRank":"10000","approve":false,"article":0,"attention":3,"attentions":[12041507,2013857,67291275],"birthday":"1980-01-01","description":"","face":"http://i2.hdslb.com/bfs/face/d525403f94b8cd8fb93df6b39e7b48ee1d68ae32.jpg","fans":624,"friend":3,"level_info":{"current_exp":8181,"current_level":4,"current_min":4500,"next_exp":10800},"mid":"18690261","name":"郁小离","nameplate":{"condition":"","image":"","image_small":"","level":"","name":"","nid":0},"official_verify":{"desc":"","type":-1},"pendant":{"expire":0,"image":"","name":"","pid":0},"place":"","rank":"10000","regtime":1448694212,"sex":"保密","sign":"脑洞很多，可惜人懒","spacesta":0,"vip":{"accessStatus":1,"dueRemark":"","vipDueDate":0,"vipStatus":0,"vipStatusWarn":"","vipType":0}},"space":{"l_img":"http://i2.hdslb.com/bfs/space/cb1c3ef50e22b6096fde67febe863494caefebad.png","s_img":"http://i2.hdslb.com/bfs/space/768cc4fd97618cf589d23c2711a1d1a729f42235.png"}}
@@ -127,7 +128,7 @@ public class VideoDetailData implements Serializable {
         this.tag_list = tag_list;
     }
 
-    public static class AuthorInfoBean {
+    public static class AuthorInfoBean implements Parcelable {
         /**
          * card : {"DisplayRank":"10000","approve":false,"article":0,"attention":3,"attentions":[12041507,2013857,67291275],"birthday":"1980-01-01","description":"","face":"http://i2.hdslb.com/bfs/face/d525403f94b8cd8fb93df6b39e7b48ee1d68ae32.jpg","fans":624,"friend":3,"level_info":{"current_exp":8181,"current_level":4,"current_min":4500,"next_exp":10800},"mid":"18690261","name":"郁小离","nameplate":{"condition":"","image":"","image_small":"","level":"","name":"","nid":0},"official_verify":{"desc":"","type":-1},"pendant":{"expire":0,"image":"","name":"","pid":0},"place":"","rank":"10000","regtime":1448694212,"sex":"保密","sign":"脑洞很多，可惜人懒","spacesta":0,"vip":{"accessStatus":1,"dueRemark":"","vipDueDate":0,"vipStatus":0,"vipStatusWarn":"","vipType":0}}
          * space : {"l_img":"http://i2.hdslb.com/bfs/space/cb1c3ef50e22b6096fde67febe863494caefebad.png","s_img":"http://i2.hdslb.com/bfs/space/768cc4fd97618cf589d23c2711a1d1a729f42235.png"}
@@ -152,7 +153,7 @@ public class VideoDetailData implements Serializable {
             this.space = space;
         }
 
-        public static class CardBean {
+        public static class CardBean implements Parcelable {
             /**
              * DisplayRank : 10000
              * approve : false
@@ -387,7 +388,7 @@ public class VideoDetailData implements Serializable {
                 this.attentions = attentions;
             }
 
-            public static class LevelInfoBean {
+            public static class LevelInfoBean implements Parcelable {
                 /**
                  * current_exp : 8181
                  * current_level : 4
@@ -431,9 +432,44 @@ public class VideoDetailData implements Serializable {
                 public void setNext_exp(int next_exp) {
                     this.next_exp = next_exp;
                 }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeInt(this.current_exp);
+                    dest.writeInt(this.current_level);
+                    dest.writeInt(this.current_min);
+                    dest.writeInt(this.next_exp);
+                }
+
+                public LevelInfoBean() {
+                }
+
+                protected LevelInfoBean(Parcel in) {
+                    this.current_exp = in.readInt();
+                    this.current_level = in.readInt();
+                    this.current_min = in.readInt();
+                    this.next_exp = in.readInt();
+                }
+
+                public static final Parcelable.Creator<LevelInfoBean> CREATOR = new Parcelable.Creator<LevelInfoBean>() {
+                    @Override
+                    public LevelInfoBean createFromParcel(Parcel source) {
+                        return new LevelInfoBean(source);
+                    }
+
+                    @Override
+                    public LevelInfoBean[] newArray(int size) {
+                        return new LevelInfoBean[size];
+                    }
+                };
             }
 
-            public static class NameplateBean {
+            public static class NameplateBean implements Parcelable {
                 /**
                  * condition :
                  * image :
@@ -497,9 +533,48 @@ public class VideoDetailData implements Serializable {
                 public void setNid(int nid) {
                     this.nid = nid;
                 }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(this.condition);
+                    dest.writeString(this.image);
+                    dest.writeString(this.image_small);
+                    dest.writeString(this.level);
+                    dest.writeString(this.name);
+                    dest.writeInt(this.nid);
+                }
+
+                public NameplateBean() {
+                }
+
+                protected NameplateBean(Parcel in) {
+                    this.condition = in.readString();
+                    this.image = in.readString();
+                    this.image_small = in.readString();
+                    this.level = in.readString();
+                    this.name = in.readString();
+                    this.nid = in.readInt();
+                }
+
+                public static final Parcelable.Creator<NameplateBean> CREATOR = new Parcelable.Creator<NameplateBean>() {
+                    @Override
+                    public NameplateBean createFromParcel(Parcel source) {
+                        return new NameplateBean(source);
+                    }
+
+                    @Override
+                    public NameplateBean[] newArray(int size) {
+                        return new NameplateBean[size];
+                    }
+                };
             }
 
-            public static class OfficialVerifyBean {
+            public static class OfficialVerifyBean implements Parcelable {
                 /**
                  * desc :
                  * type : -1
@@ -523,9 +598,40 @@ public class VideoDetailData implements Serializable {
                 public void setType(int type) {
                     this.type = type;
                 }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(this.desc);
+                    dest.writeInt(this.type);
+                }
+
+                public OfficialVerifyBean() {
+                }
+
+                protected OfficialVerifyBean(Parcel in) {
+                    this.desc = in.readString();
+                    this.type = in.readInt();
+                }
+
+                public static final Parcelable.Creator<OfficialVerifyBean> CREATOR = new Parcelable.Creator<OfficialVerifyBean>() {
+                    @Override
+                    public OfficialVerifyBean createFromParcel(Parcel source) {
+                        return new OfficialVerifyBean(source);
+                    }
+
+                    @Override
+                    public OfficialVerifyBean[] newArray(int size) {
+                        return new OfficialVerifyBean[size];
+                    }
+                };
             }
 
-            public static class PendantBean {
+            public static class PendantBean implements Parcelable {
                 /**
                  * expire : 0
                  * image :
@@ -569,9 +675,44 @@ public class VideoDetailData implements Serializable {
                 public void setPid(int pid) {
                     this.pid = pid;
                 }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeInt(this.expire);
+                    dest.writeString(this.image);
+                    dest.writeString(this.name);
+                    dest.writeInt(this.pid);
+                }
+
+                public PendantBean() {
+                }
+
+                protected PendantBean(Parcel in) {
+                    this.expire = in.readInt();
+                    this.image = in.readString();
+                    this.name = in.readString();
+                    this.pid = in.readInt();
+                }
+
+                public static final Parcelable.Creator<PendantBean> CREATOR = new Parcelable.Creator<PendantBean>() {
+                    @Override
+                    public PendantBean createFromParcel(Parcel source) {
+                        return new PendantBean(source);
+                    }
+
+                    @Override
+                    public PendantBean[] newArray(int size) {
+                        return new PendantBean[size];
+                    }
+                };
             }
 
-            public static class VipBean {
+            public static class VipBean implements Parcelable {
                 /**
                  * accessStatus : 1
                  * dueRemark :
@@ -635,10 +776,123 @@ public class VideoDetailData implements Serializable {
                 public void setVipType(int vipType) {
                     this.vipType = vipType;
                 }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeInt(this.accessStatus);
+                    dest.writeString(this.dueRemark);
+                    dest.writeInt(this.vipDueDate);
+                    dest.writeInt(this.vipStatus);
+                    dest.writeString(this.vipStatusWarn);
+                    dest.writeInt(this.vipType);
+                }
+
+                public VipBean() {
+                }
+
+                protected VipBean(Parcel in) {
+                    this.accessStatus = in.readInt();
+                    this.dueRemark = in.readString();
+                    this.vipDueDate = in.readInt();
+                    this.vipStatus = in.readInt();
+                    this.vipStatusWarn = in.readString();
+                    this.vipType = in.readInt();
+                }
+
+                public static final Parcelable.Creator<VipBean> CREATOR = new Parcelable.Creator<VipBean>() {
+                    @Override
+                    public VipBean createFromParcel(Parcel source) {
+                        return new VipBean(source);
+                    }
+
+                    @Override
+                    public VipBean[] newArray(int size) {
+                        return new VipBean[size];
+                    }
+                };
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(this.DisplayRank);
+                dest.writeByte(this.approve ? (byte) 1 : (byte) 0);
+                dest.writeInt(this.article);
+                dest.writeInt(this.attention);
+                dest.writeString(this.birthday);
+                dest.writeString(this.description);
+                dest.writeString(this.face);
+                dest.writeInt(this.fans);
+                dest.writeInt(this.friend);
+                dest.writeParcelable(this.level_info, flags);
+                dest.writeString(this.mid);
+                dest.writeString(this.name);
+                dest.writeParcelable(this.nameplate, flags);
+                dest.writeParcelable(this.official_verify, flags);
+                dest.writeParcelable(this.pendant, flags);
+                dest.writeString(this.place);
+                dest.writeString(this.rank);
+                dest.writeInt(this.regtime);
+                dest.writeString(this.sex);
+                dest.writeString(this.sign);
+                dest.writeInt(this.spacesta);
+                dest.writeParcelable(this.vip, flags);
+                dest.writeList(this.attentions);
+            }
+
+            public CardBean() {
+            }
+
+            protected CardBean(Parcel in) {
+                this.DisplayRank = in.readString();
+                this.approve = in.readByte() != 0;
+                this.article = in.readInt();
+                this.attention = in.readInt();
+                this.birthday = in.readString();
+                this.description = in.readString();
+                this.face = in.readString();
+                this.fans = in.readInt();
+                this.friend = in.readInt();
+                this.level_info = in.readParcelable(LevelInfoBean.class.getClassLoader());
+                this.mid = in.readString();
+                this.name = in.readString();
+                this.nameplate = in.readParcelable(NameplateBean.class.getClassLoader());
+                this.official_verify = in.readParcelable(OfficialVerifyBean.class.getClassLoader());
+                this.pendant = in.readParcelable(PendantBean.class.getClassLoader());
+                this.place = in.readString();
+                this.rank = in.readString();
+                this.regtime = in.readInt();
+                this.sex = in.readString();
+                this.sign = in.readString();
+                this.spacesta = in.readInt();
+                this.vip = in.readParcelable(VipBean.class.getClassLoader());
+                this.attentions = new ArrayList<Integer>();
+                in.readList(this.attentions, Integer.class.getClassLoader());
+            }
+
+            public static final Parcelable.Creator<CardBean> CREATOR = new Parcelable.Creator<CardBean>() {
+                @Override
+                public CardBean createFromParcel(Parcel source) {
+                    return new CardBean(source);
+                }
+
+                @Override
+                public CardBean[] newArray(int size) {
+                    return new CardBean[size];
+                }
+            };
         }
 
-        public static class SpaceBean {
+        public static class SpaceBean implements Parcelable {
             /**
              * l_img : http://i2.hdslb.com/bfs/space/cb1c3ef50e22b6096fde67febe863494caefebad.png
              * s_img : http://i2.hdslb.com/bfs/space/768cc4fd97618cf589d23c2711a1d1a729f42235.png
@@ -662,10 +916,72 @@ public class VideoDetailData implements Serializable {
             public void setS_img(String s_img) {
                 this.s_img = s_img;
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(this.l_img);
+                dest.writeString(this.s_img);
+            }
+
+            public SpaceBean() {
+            }
+
+            protected SpaceBean(Parcel in) {
+                this.l_img = in.readString();
+                this.s_img = in.readString();
+            }
+
+            public static final Parcelable.Creator<SpaceBean> CREATOR = new Parcelable.Creator<SpaceBean>() {
+                @Override
+                public SpaceBean createFromParcel(Parcel source) {
+                    return new SpaceBean(source);
+                }
+
+                @Override
+                public SpaceBean[] newArray(int size) {
+                    return new SpaceBean[size];
+                }
+            };
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeParcelable(this.card, flags);
+            dest.writeParcelable(this.space, flags);
+        }
+
+        public AuthorInfoBean() {
+        }
+
+        protected AuthorInfoBean(Parcel in) {
+            this.card = in.readParcelable(CardBean.class.getClassLoader());
+            this.space = in.readParcelable(SpaceBean.class.getClassLoader());
+        }
+
+        public static final Parcelable.Creator<AuthorInfoBean> CREATOR = new Parcelable.Creator<AuthorInfoBean>() {
+            @Override
+            public AuthorInfoBean createFromParcel(Parcel source) {
+                return new AuthorInfoBean(source);
+            }
+
+            @Override
+            public AuthorInfoBean[] newArray(int size) {
+                return new AuthorInfoBean[size];
+            }
+        };
     }
 
-    public static class PlayInfoBean {
+    public static class PlayInfoBean implements Parcelable {
         /**
          * coin : 1447
          * danmaku : 257
@@ -749,9 +1065,55 @@ public class VideoDetailData implements Serializable {
         public void setView(int view) {
             this.view = view;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(this.coin);
+            dest.writeInt(this.danmaku);
+            dest.writeInt(this.favorite);
+            dest.writeInt(this.his_rank);
+            dest.writeInt(this.now_rank);
+            dest.writeInt(this.reply);
+            dest.writeInt(this.share);
+            dest.writeInt(this.view);
+        }
+
+        public PlayInfoBean() {
+        }
+
+        protected PlayInfoBean(Parcel in) {
+            this.coin = in.readInt();
+            this.danmaku = in.readInt();
+            this.favorite = in.readInt();
+            this.his_rank = in.readInt();
+            this.now_rank = in.readInt();
+            this.reply = in.readInt();
+            this.share = in.readInt();
+            this.view = in.readInt();
+        }
+
+        public static final Parcelable.Creator<PlayInfoBean> CREATOR = new Parcelable.Creator<PlayInfoBean>() {
+            @Override
+            public PlayInfoBean createFromParcel(Parcel source) {
+                return new PlayInfoBean(source);
+            }
+
+            @Override
+            public PlayInfoBean[] newArray(int size) {
+                return new PlayInfoBean[size];
+            }
+        };
     }
 
-    public static class VideoInfoBean {
+    /**
+     * 视频真正url和大小
+     */
+    public static class VideoInfoBean implements Parcelable {
         /**
          * length : 168972
          * size : 39546940
@@ -785,5 +1147,88 @@ public class VideoDetailData implements Serializable {
         public void setUrl_list(List<String> url_list) {
             this.url_list = url_list;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.length);
+            dest.writeString(this.size);
+            dest.writeStringList(this.url_list);
+        }
+
+        public VideoInfoBean() {
+        }
+
+        protected VideoInfoBean(Parcel in) {
+            this.length = in.readString();
+            this.size = in.readString();
+            this.url_list = in.createStringArrayList();
+        }
+
+        public static final Parcelable.Creator<VideoInfoBean> CREATOR = new Parcelable.Creator<VideoInfoBean>() {
+            @Override
+            public VideoInfoBean createFromParcel(Parcel source) {
+                return new VideoInfoBean(source);
+            }
+
+            @Override
+            public VideoInfoBean[] newArray(int size) {
+                return new VideoInfoBean[size];
+            }
+        };
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.author_info, flags);
+        dest.writeString(this.category);
+        dest.writeString(this.category_url);
+        dest.writeInt(this.cid);
+        dest.writeString(this.create_time);
+        dest.writeString(this.desc);
+        dest.writeParcelable(this.play_info, flags);
+        dest.writeString(this.title);
+        dest.writeParcelable(this.video_info, flags);
+        dest.writeList(this.relative_list);
+        dest.writeStringList(this.tag_list);
+    }
+
+    public VideoDetailData() {
+    }
+
+    protected VideoDetailData(Parcel in) {
+        this.author_info = in.readParcelable(AuthorInfoBean.class.getClassLoader());
+        this.category = in.readString();
+        this.category_url = in.readString();
+        this.cid = in.readInt();
+        this.create_time = in.readString();
+        this.desc = in.readString();
+        this.play_info = in.readParcelable(PlayInfoBean.class.getClassLoader());
+        this.title = in.readString();
+        this.video_info = in.readParcelable(VideoInfoBean.class.getClassLoader());
+        this.relative_list = new ArrayList<VideoItem>();
+        in.readList(this.relative_list, VideoItem.class.getClassLoader());
+        this.tag_list = in.createStringArrayList();
+    }
+
+    public static final Parcelable.Creator<VideoDetailData> CREATOR = new Parcelable.Creator<VideoDetailData>() {
+        @Override
+        public VideoDetailData createFromParcel(Parcel source) {
+            return new VideoDetailData(source);
+        }
+
+        @Override
+        public VideoDetailData[] newArray(int size) {
+            return new VideoDetailData[size];
+        }
+    };
 }

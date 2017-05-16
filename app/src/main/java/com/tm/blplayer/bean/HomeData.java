@@ -1,6 +1,9 @@
 package com.tm.blplayer.bean;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,9 +12,7 @@ import java.util.List;
  * @since 2017/4/17
  */
 
-public class HomeData implements Serializable {
-
-    private static final long serialVersionUID = -390743897199718293L;
+public class HomeData implements Parcelable {
 
     private List<BannerItem> banner;    //banner
 
@@ -183,4 +184,75 @@ public class HomeData implements Serializable {
                 ", teleplay=" + teleplay +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(this.banner);
+        dest.writeList(this.ad);
+        dest.writeList(this.bangumi);
+        dest.writeList(this.dance);
+        dest.writeList(this.douga);
+        dest.writeList(this.ent);
+        dest.writeList(this.fashion);
+        dest.writeList(this.game);
+        dest.writeList(this.guochuang);
+        dest.writeList(this.kichiku);
+        dest.writeList(this.life);
+        dest.writeList(this.movie);
+        dest.writeList(this.music);
+        dest.writeList(this.technology);
+        dest.writeList(this.teleplay);
+    }
+
+    public HomeData() {
+    }
+
+    protected HomeData(Parcel in) {
+        this.banner = in.createTypedArrayList(BannerItem.CREATOR);
+        this.ad = new ArrayList<VideoItem>();
+        in.readList(this.ad, VideoItem.class.getClassLoader());
+        this.bangumi = new ArrayList<VideoItem>();
+        in.readList(this.bangumi, VideoItem.class.getClassLoader());
+        this.dance = new ArrayList<VideoItem>();
+        in.readList(this.dance, VideoItem.class.getClassLoader());
+        this.douga = new ArrayList<VideoItem>();
+        in.readList(this.douga, VideoItem.class.getClassLoader());
+        this.ent = new ArrayList<VideoItem>();
+        in.readList(this.ent, VideoItem.class.getClassLoader());
+        this.fashion = new ArrayList<VideoItem>();
+        in.readList(this.fashion, VideoItem.class.getClassLoader());
+        this.game = new ArrayList<VideoItem>();
+        in.readList(this.game, VideoItem.class.getClassLoader());
+        this.guochuang = new ArrayList<VideoItem>();
+        in.readList(this.guochuang, VideoItem.class.getClassLoader());
+        this.kichiku = new ArrayList<VideoItem>();
+        in.readList(this.kichiku, VideoItem.class.getClassLoader());
+        this.life = new ArrayList<VideoItem>();
+        in.readList(this.life, VideoItem.class.getClassLoader());
+        this.movie = new ArrayList<VideoItem>();
+        in.readList(this.movie, VideoItem.class.getClassLoader());
+        this.music = new ArrayList<VideoItem>();
+        in.readList(this.music, VideoItem.class.getClassLoader());
+        this.technology = new ArrayList<VideoItem>();
+        in.readList(this.technology, VideoItem.class.getClassLoader());
+        this.teleplay = new ArrayList<VideoItem>();
+        in.readList(this.teleplay, VideoItem.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<HomeData> CREATOR = new Parcelable.Creator<HomeData>() {
+        @Override
+        public HomeData createFromParcel(Parcel source) {
+            return new HomeData(source);
+        }
+
+        @Override
+        public HomeData[] newArray(int size) {
+            return new HomeData[size];
+        }
+    };
 }

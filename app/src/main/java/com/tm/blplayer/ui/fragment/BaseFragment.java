@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tm.blplayer.mvp.presenter.BasePresenter;
+import com.tm.blplayer.mvp.view.BaseView;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
 import butterknife.ButterKnife;
@@ -21,6 +23,7 @@ public abstract class BaseFragment extends RxFragment {
 
     private View mRootView;
     private Unbinder bind;
+    private BasePresenter<BaseView> presenter;
 
     @Nullable
     @Override
@@ -45,9 +48,12 @@ public abstract class BaseFragment extends RxFragment {
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         if (bind != null) {
             bind.unbind();
         }
+        if (presenter != null) {
+            presenter.onDetach();
+        }
+        super.onDestroyView();
     }
 }

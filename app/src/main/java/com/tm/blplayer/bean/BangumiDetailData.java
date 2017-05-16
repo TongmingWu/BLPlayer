@@ -1,6 +1,8 @@
 package com.tm.blplayer.bean;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -9,58 +11,7 @@ import java.util.List;
  * @since 2017/4/17
  */
 
-public class BangumiDetailData implements Serializable {
-
-    private static final long serialVersionUID = -7295909166284994877L;
-
-    /**
-     * actor : [{"actor":"松岡禎丞","actor_id":0,"role":"和泉正宗"},{"actor":"藤田茜","actor_id":0,"role":"和泉纱雾"},{"actor":"高橋未奈美","actor_id":0,"role":"山田精灵"},{"actor":"大西沙織","actor_id":0,"role":"千寿村征"},{"actor":"木戸衣吹","actor_id":0,"role":"神野恵"},{"actor":"石川由依","actor_id":0,"role":"高砂智惠"}]
-     * alias : エロマンガ先生,妹妹,黄漫,情色,漫画,伏见司,妹控,德国,骨科
-     * allow_bp : 1
-     * allow_download : 1
-     * area : 日本
-     * arealimit : 0
-     * ban_area_show : 1
-     * bangumi_id : 3597
-     * bangumi_title : 埃罗芒阿老师
-     * brief : 高中生兼小说作家的“和泉正宗”（笔名：和泉征宗）有个家里蹲的妹妹“和泉纱雾”。一年前才成为家人的她，...
-     * coins : 30465
-     * copyright : dujia
-     * cover : http://i0.hdslb.com/bfs/bangumi/a223b1376633625be1cd214c34d8bf34a1e03770.jpg
-     * danmaku_count : 140902
-     * ed_jump : 5
-     * episodes : [{"av_id":"9854952","coins":"12313","cover":"http://i0.hdslb.com/bfs/archive/54d702893bc8e64c47c97b530a09375b625bf461.jpg","episode_id":"103918","episode_status":2,"index":"2","index_title":"现充班长与无畏妖精","is_new":"1","is_webplay":"0","mid":"928123","page":"1","up":{},"update_time":"2017-04-16 01:00:00.0","webplay_url":"http://bangumi.bilibili.com/anime/5997/play#103918"},{"av_id":"9698756","coins":"18161","cover":"http://i2.hdslb.com/bfs/archive/85f4b2cb478865208e6eb74ed87d7c7cff8d338c.jpg","episode_id":"103917","episode_status":2,"index":"1","index_title":"妹妹与不可进入之屋","is_webplay":"0","mid":"928123","page":"1","up":{},"update_time":"2017-04-09 01:00:00.0","webplay_url":"http://bangumi.bilibili.com/anime/5997/play#103917"}]
-     * evaluate : 高中生兼小说作家的“和泉正宗”（笔名：和泉征宗）有个家里蹲的妹妹“和泉纱雾”。一年前才成为家人的她，却完全不走出居室，并也用力踩踏地板，要我帮她准备食物。为了这段称不上“兄妹”的关系，正宗得想个办法让她自己走出居室才行，因为两人已是目前仅存能相依为命的“家人”……至于正宗的搭挡插画家“情色漫画老师”，是个能够画出非常棒煽情图的可靠伙伴。虽然双方并没见过面，但我一直很感谢他！只是在某一天，正宗突然发现到一个冲击事实，那就是“情色漫画老师”其实就是纱雾！？
-     * favorites : 1099652
-     * is_finish : 0
-     * is_started : 1
-     * jp_title : エロマンガ先生
-     * limitGroupId : 317
-     * newest_ep_id : 103918
-     * newest_ep_index : 2
-     * payment : {"price":"0"}
-     * play_count : 3039076
-     * pub_time : 2017-04-09 01:00:00
-     * recommend_bangumi : [{"bangumi_id":"606","cover":"http://i0.hdslb.com/bfs/bangumi/ece1d427f23c4167d397a77dc6e96913bf68c547.jpg","follow":"1067","isfinish":"1","pub_time":"","season_id":"945","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/596fc0d465852dbda114dffc931d74c8342af3f6.jpg","tag_id":"16","tag_name":"日常"},{"cover":"http://i0.hdslb.com/bfs/bangumi/3515223f10dc3f3501a226a51d37766f77023515.jpg","tag_id":"21","tag_name":"治愈"},{"cover":"http://i0.hdslb.com/bfs/bangumi/5290ad4291feb5b9cf5f72bacb0c7d2df9569041.jpg","tag_id":"24","tag_name":"少儿"}],"title":"苏希的动物园","total_count":"10"},{"bangumi_id":"927","cover":"http://i0.hdslb.com/bfs/bangumi/a4168b8b1d16b60e494783e18ac95bbb19864e1e.jpg","follow":"97725","isfinish":"1","pub_time":"","season_id":"1379","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/97ec6e61b28850be0dbe30054d33b391335c98d5.png","tag_id":"20","tag_name":"热血"},{"cover":"http://i0.hdslb.com/bfs/bangumi/0016f67c3372caa2dc114efe8d2c93e78a79d88b.png","tag_id":"71","tag_name":"科幻"},{"cover":"http://i0.hdslb.com/bfs/bangumi/2182a63b87a3078dcfc78c6a3ea4ab9042db1403.jpg","tag_id":"95","tag_name":"战斗"},{"cover":"http://i0.hdslb.com/bfs/bangumi/2479b9527beba67105815713b00d8dff9f7ab584.jpg","tag_id":"103","tag_name":"智斗"},{"cover":"http://i0.hdslb.com/bfs/bangumi/25438eba103249ddeddbde65fa2d0e630f983f20.jpg","tag_id":"135","tag_name":"漫改"}],"title":"黑礁","total_count":"12"},{"bangumi_id":"3274","cover":"http://i0.hdslb.com/bfs/bangumi/bb4f81ec1db5debb338d5c720aef6f670bd81e03.jpg","follow":"35355","isfinish":"1","pub_time":"","season_id":"5454","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/ab740389cc0c2458c8fa5cc32c256f27ad550334.png","tag_id":"57","tag_name":"奇幻"},{"cover":"http://i0.hdslb.com/bfs/bangumi/d364c430edf2c8bbe2514237cb48ff8db7579741.jpg","tag_id":"136","tag_name":"游戏改"}],"title":"最终幻想15 兄弟情","total_count":"5"},{"bangumi_id":"724","cover":"http://i0.hdslb.com/bfs/bangumi/f98725a2e60ce3246fba79d2b55b928c99f4d326.jpg","follow":"23842","isfinish":"1","pub_time":"","season_id":"1112","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/97ec6e61b28850be0dbe30054d33b391335c98d5.png","tag_id":"20","tag_name":"热血"},{"cover":"http://i0.hdslb.com/bfs/bangumi/ab740389cc0c2458c8fa5cc32c256f27ad550334.png","tag_id":"57","tag_name":"奇幻"},{"cover":"http://i0.hdslb.com/bfs/bangumi/dae349a1d168b34a95888eb1db6f911a202b2270.png","tag_id":"88","tag_name":"时泪"},{"cover":"http://i0.hdslb.com/bfs/bangumi/1b7d40a044ecfa45bef10893fc275c548b216da0.jpg","tag_id":"122","tag_name":"魔法"},{"cover":"http://i0.hdslb.com/bfs/bangumi/68c736ea3725b8291e226966c873dca249bcde52.jpg","tag_id":"139","tag_name":"神魔"}],"title":"秀逗魔导士 第一季","total_count":"26"},{"bangumi_id":"711","cover":"http://i0.hdslb.com/bfs/bangumi/dd5295d7d0935f21820aeb067bf3d8f12f70d39f.jpg","follow":"5681","isfinish":"1","pub_time":"","season_id":"2703","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/0835b9e666474a4458545bc8d0e5aca3e2b1cdbc.png","tag_id":"6","tag_name":"百合"},{"cover":"http://i0.hdslb.com/bfs/bangumi/e4a0ac47debfff98fd186e74efefbb518ad04622.jpg","tag_id":"9","tag_name":"少女"},{"cover":"http://i0.hdslb.com/bfs/bangumi/596fc0d465852dbda114dffc931d74c8342af3f6.jpg","tag_id":"16","tag_name":"日常"},{"cover":"http://i0.hdslb.com/bfs/bangumi/a1dc29555c877ef29717d856e8d5555cc821ad2d.jpg","tag_id":"93","tag_name":"校园"},{"cover":"http://i0.hdslb.com/bfs/bangumi/e6bb606d4e7f489b020048a744eb6f5d13b77750.jpg","tag_id":"117","tag_name":"轻改"}],"title":"圣母在上 ~春~","total_count":"13"},{"bangumi_id":"1848","cover":"http://i0.hdslb.com/bfs/bangumi/23ffac3faaadddedbb8ef47b84329946d306174f.jpg","follow":"338143","isfinish":"1","pub_time":"","season_id":"2724","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/67dc3bd0fb3c41708d43552da73d651c5447dff9.png","tag_id":"5","tag_name":"后宫"},{"cover":"http://i0.hdslb.com/bfs/bangumi/ab740389cc0c2458c8fa5cc32c256f27ad550334.png","tag_id":"57","tag_name":"奇幻"},{"cover":"http://i0.hdslb.com/bfs/bangumi/a1dc29555c877ef29717d856e8d5555cc821ad2d.jpg","tag_id":"93","tag_name":"校园"},{"cover":"http://i0.hdslb.com/bfs/bangumi/2182a63b87a3078dcfc78c6a3ea4ab9042db1403.jpg","tag_id":"95","tag_name":"战斗"}],"title":"对魔导学园35试验小队","total_count":"12"},{"bangumi_id":"1367","cover":"http://i0.hdslb.com/bfs/bangumi/a23b14a0d58f6ab77bdbc942c3998b0e3b6eafb5.jpg","follow":"9397","isfinish":"1","pub_time":"","season_id":"2006","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/596fc0d465852dbda114dffc931d74c8342af3f6.jpg","tag_id":"16","tag_name":"日常"}],"title":"钟之音学院","total_count":"12"},{"bangumi_id":"1079","cover":"http://i0.hdslb.com/bfs/bangumi/fa9e6dc89bbaa46ac832fd2e696f410b5d98eac1.jpg","follow":"10801","isfinish":"1","pub_time":"","season_id":"1571","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/b0bd569034e48dbb70ecd117c6117bced349dae6.png","tag_id":"44","tag_name":"泡面"},{"cover":"http://i0.hdslb.com/bfs/bangumi/596fc0d465852dbda114dffc931d74c8342af3f6.jpg","tag_id":"16","tag_name":"日常"}],"title":"黏黏糊糊！！角质君","total_count":"25"},{"bangumi_id":"2656","cover":"http://i0.hdslb.com/bfs/bangumi/c3c886782f033bc74f3a8d50b0b0214c7c8da53a.jpg","follow":"4637","isfinish":"1","pub_time":"","season_id":"4582","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/cc40d5921af3972c6587f0384eeaf9a039404b2e.jpg","tag_id":"87","tag_name":"猎奇"}],"title":"视而不见","total_count":"1"},{"bangumi_id":"2064","cover":"http://i0.hdslb.com/bfs/bangumi/0f7e61f126a4803d980f124da7b45ebdbdc7534c.jpg","follow":"6027","isfinish":"1","pub_time":"","season_id":"3278","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/97ec6e61b28850be0dbe30054d33b391335c98d5.png","tag_id":"20","tag_name":"热血"},{"cover":"http://i0.hdslb.com/bfs/bangumi/ab740389cc0c2458c8fa5cc32c256f27ad550334.png","tag_id":"57","tag_name":"奇幻"},{"cover":"http://i0.hdslb.com/bfs/bangumi/0016f67c3372caa2dc114efe8d2c93e78a79d88b.png","tag_id":"71","tag_name":"科幻"},{"cover":"http://i0.hdslb.com/bfs/bangumi/2182a63b87a3078dcfc78c6a3ea4ab9042db1403.jpg","tag_id":"95","tag_name":"战斗"}],"title":"背骑少女","total_count":"12"},{"bangumi_id":"409","cover":"http://i0.hdslb.com/bfs/bangumi/094d59babca96bf43c1b828c662fe90fa8e2b778.jpg","follow":"9072","isfinish":"1","pub_time":"","season_id":"5389","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/ab740389cc0c2458c8fa5cc32c256f27ad550334.png","tag_id":"57","tag_name":"奇幻"},{"cover":"http://i0.hdslb.com/bfs/bangumi/0016f67c3372caa2dc114efe8d2c93e78a79d88b.png","tag_id":"71","tag_name":"科幻"},{"cover":"http://i0.hdslb.com/bfs/bangumi/2182a63b87a3078dcfc78c6a3ea4ab9042db1403.jpg","tag_id":"95","tag_name":"战斗"},{"cover":"http://i0.hdslb.com/bfs/bangumi/25438eba103249ddeddbde65fa2d0e630f983f20.jpg","tag_id":"135","tag_name":"漫改"}],"title":"复仇者: 奥创革命","total_count":"26"},{"bangumi_id":"3481","cover":"http://i0.hdslb.com/bfs/bangumi/948878ec7fc44c3e824d6204b4de91abfb0dce17.jpg","follow":"786225","isfinish":"1","pub_time":"","season_id":"5797","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/97ec6e61b28850be0dbe30054d33b391335c98d5.png","tag_id":"20","tag_name":"热血"},{"cover":"http://i0.hdslb.com/bfs/bangumi/2182a63b87a3078dcfc78c6a3ea4ab9042db1403.jpg","tag_id":"95","tag_name":"战斗"},{"cover":"http://i0.hdslb.com/bfs/bangumi/0ce4679a14f6dc9ce05d89f4f804469540a8aa93.jpg","tag_id":"137","tag_name":"原创"},{"cover":"http://i0.hdslb.com/bfs/bangumi/902e2fed714e81bcc9b4fa62fdfe62b7a371d448.jpg","tag_id":"141","tag_name":"萝莉"}],"title":"Hand Shakers","total_count":"12"},{"bangumi_id":"436","cover":"http://i0.hdslb.com/bfs/bangumi/a54a066f1a4eb4c9b1a8b60e3e6bd2c26ad8f3f8.jpg","follow":"116580","isfinish":"1","pub_time":"","season_id":"709","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/596fc0d465852dbda114dffc931d74c8342af3f6.jpg","tag_id":"16","tag_name":"日常"},{"cover":"http://i0.hdslb.com/bfs/bangumi/0d8dc795344805ed772a9e6d7395bfea78aa9d94.png","tag_id":"70","tag_name":"搞笑"},{"cover":"http://i0.hdslb.com/bfs/bangumi/2dd9492da6692e5254e0240d10ea23f4cfec3461.png","tag_id":"81","tag_name":"萌系"}],"title":"爱杀宝贝 日语版","total_count":"13"},{"bangumi_id":"485","cover":"http://i0.hdslb.com/bfs/bangumi/61ab91aeb0d6361dd15eb1193d93f4adee415993.jpg","follow":"10407","isfinish":"1","pub_time":"","season_id":"3352","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/b0bd569034e48dbb70ecd117c6117bced349dae6.png","tag_id":"44","tag_name":"泡面"},{"cover":"http://i0.hdslb.com/bfs/bangumi/596fc0d465852dbda114dffc931d74c8342af3f6.jpg","tag_id":"16","tag_name":"日常"},{"cover":"http://i0.hdslb.com/bfs/bangumi/2dd9492da6692e5254e0240d10ea23f4cfec3461.png","tag_id":"81","tag_name":"萌系"}],"title":"千岁 Get You!!","total_count":"26"},{"bangumi_id":"2148","cover":"http://i0.hdslb.com/bfs/bangumi/2c7ecfbeac61ac4e130a2171debe023756b9ec55.jpg","follow":"6912","isfinish":"1","pub_time":"","season_id":"3564","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/2182a63b87a3078dcfc78c6a3ea4ab9042db1403.jpg","tag_id":"95","tag_name":"战斗"},{"cover":"http://i0.hdslb.com/bfs/bangumi/fc51964776209a58a0d5eed4257ae36b123593f9.jpg","tag_id":"105","tag_name":"机战"}],"title":"超时空要塞F 虚空歌姬 前篇","total_count":"1"},{"bangumi_id":"1180","cover":"http://i0.hdslb.com/bfs/bangumi/f023cbe53828f0a9a8e4894f446d34427655b3fa.jpg","follow":"231286","isfinish":"1","pub_time":"","season_id":"2581","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/b0bd569034e48dbb70ecd117c6117bced349dae6.png","tag_id":"44","tag_name":"泡面"},{"cover":"http://i0.hdslb.com/bfs/bangumi/596fc0d465852dbda114dffc931d74c8342af3f6.jpg","tag_id":"16","tag_name":"日常"},{"cover":"http://i0.hdslb.com/bfs/bangumi/2dd9492da6692e5254e0240d10ea23f4cfec3461.png","tag_id":"81","tag_name":"萌系"},{"cover":"http://i0.hdslb.com/bfs/bangumi/e05a5c97b5dca69f9f07351f9ac43cd1f5301fb8.jpg","tag_id":"98","tag_name":"声控"}],"title":"黑塔利亚 The World Twinkle 第6期","total_count":"15"},{"bangumi_id":"293","cover":"http://i0.hdslb.com/bfs/bangumi/1e122ceab911caa7fdcd7abb6d676de8050a95ae.jpg","follow":"45842","isfinish":"1","pub_time":"","season_id":"485","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/699470c9cc7ae184b17185a6f5db0c5b94206867.jpg","tag_id":"22","tag_name":"致郁"},{"cover":"http://i0.hdslb.com/bfs/bangumi/0016f67c3372caa2dc114efe8d2c93e78a79d88b.png","tag_id":"71","tag_name":"科幻"}],"title":"核爆默示录","total_count":"13"},{"bangumi_id":"3050","cover":"http://i0.hdslb.com/bfs/bangumi/1a6931949813b81ea62508c79be0ba9bda71e8f3.jpg","follow":"4932","isfinish":"1","pub_time":"","season_id":"5138","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/a1dc29555c877ef29717d856e8d5555cc821ad2d.jpg","tag_id":"93","tag_name":"校园"}],"title":"东月西阳","total_count":"17"},{"bangumi_id":"3161","cover":"http://i0.hdslb.com/bfs/bangumi/e3a9053baefc149bc25d0dc9d86cc7469a9ed84c.jpg","follow":"4380","isfinish":"1","pub_time":"","season_id":"5286","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/dae349a1d168b34a95888eb1db6f911a202b2270.png","tag_id":"88","tag_name":"时泪"},{"cover":"http://i0.hdslb.com/bfs/bangumi/2182a63b87a3078dcfc78c6a3ea4ab9042db1403.jpg","tag_id":"95","tag_name":"战斗"}],"title":"最终幻想：无限","total_count":"25"},{"bangumi_id":"569","cover":"http://i0.hdslb.com/bfs/bangumi/65d95d9124f3fa27374bc65e1db71f7d393983f4.jpg","follow":"1663","isfinish":"1","pub_time":"","season_id":"4622","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/97ec6e61b28850be0dbe30054d33b391335c98d5.png","tag_id":"20","tag_name":"热血"},{"cover":"http://i0.hdslb.com/bfs/bangumi/ab740389cc0c2458c8fa5cc32c256f27ad550334.png","tag_id":"57","tag_name":"奇幻"}],"title":"Sacred Seven 银月之翼","total_count":"1"},{"bangumi_id":"2990","cover":"http://i0.hdslb.com/bfs/bangumi/6d40f31e04799d1512e92925980765157fe7e889.jpg","follow":"68923","isfinish":"1","pub_time":"","season_id":"5210","season_status":2,"tags":[],"title":"一人之下 日语版","total_count":"12"},{"bangumi_id":"381","cover":"http://i0.hdslb.com/bfs/bangumi/fa28f081426cfe602d6a5c7beade2dcf4731322c.jpg","follow":"54553","isfinish":"1","pub_time":"","season_id":"632","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/67dc3bd0fb3c41708d43552da73d651c5447dff9.png","tag_id":"5","tag_name":"后宫"},{"cover":"http://i0.hdslb.com/bfs/bangumi/596fc0d465852dbda114dffc931d74c8342af3f6.jpg","tag_id":"16","tag_name":"日常"},{"cover":"http://i0.hdslb.com/bfs/bangumi/a1dc29555c877ef29717d856e8d5555cc821ad2d.jpg","tag_id":"93","tag_name":"校园"},{"cover":"http://i0.hdslb.com/bfs/bangumi/e6bb606d4e7f489b020048a744eb6f5d13b77750.jpg","tag_id":"117","tag_name":"轻改"}],"title":"学生会的一己之见 Lv.2","total_count":"10"},{"bangumi_id":"1908","cover":"http://i0.hdslb.com/bfs/bangumi/1c3a9288b3b1ad40564284e3569d632bd17f546d.jpg","follow":"28245","isfinish":"0","pub_time":"","season_id":"2846","season_status":2,"tags":[],"title":"时间支配者","total_count":"0"},{"bangumi_id":"1819","cover":"http://i0.hdslb.com/bfs/bangumi/0d967aad82ad5370f47626a536f5473181ebfc37.jpg","follow":"16633","isfinish":"1","pub_time":"","season_id":"2664","season_status":2,"tags":[{"cover":"http://i0.hdslb.com/bfs/bangumi/0016f67c3372caa2dc114efe8d2c93e78a79d88b.png","tag_id":"71","tag_name":"科幻"}],"title":"回忆三部曲 Memories","total_count":"3"}]
-     * related_seasons : []
-     * season_id : 5997
-     * season_status : 2
-     * season_title : TV
-     * seasons : []
-     * share_url : http://bangumi.bilibili.com/anime/5997/
-     * squareCover : http://i0.hdslb.com/bfs/bangumi/8cc2ec4691707e94768c392c3ced37a1c3107430.jpg
-     * staff : 导演：竹下良平 人物设定：かんざきひろ 主题歌演出：ClariS 总作画监督：小林真平、岡勇一 原作：伏見つかさ 人物原案：かんざきひろ 系列构成：髙橋龍也 音乐：菊谷知樹
-     * tag2s : []
-     * tags : [{"cover":"http://i0.hdslb.com/bfs/bangumi/0d8dc795344805ed772a9e6d7395bfea78aa9d94.png","tag_id":"70","tag_name":"搞笑"},{"cover":"http://i0.hdslb.com/bfs/bangumi/60443c708f3d4c91355d1cb4ad813d16258a3fda.png","tag_id":"110","tag_name":"恋爱"},{"cover":"http://i0.hdslb.com/bfs/bangumi/e6bb606d4e7f489b020048a744eb6f5d13b77750.jpg","tag_id":"117","tag_name":"轻改"}]
-     * title : 埃罗芒阿老师
-     * total_count : 12
-     * user_season : {"attention":"0","bp":0,"last_ep_index":"","last_time":"0","report_ts":0}
-     * version : tv
-     * viewRank : 0
-     * vip_quality : 1
-     * watchingCount : 0
-     * weekday : 0
-     */
+public class BangumiDetailData implements Parcelable {
 
     private String alias;
     private String allow_bp;
@@ -108,6 +59,64 @@ public class BangumiDetailData implements Serializable {
     private List<?> seasons;
     private List<?> tag2s;
     private List<TagsBeanX> tags;
+
+    protected BangumiDetailData(Parcel in) {
+        alias = in.readString();
+        allow_bp = in.readString();
+        allow_download = in.readString();
+        area = in.readString();
+        arealimit = in.readInt();
+        ban_area_show = in.readInt();
+        bangumi_id = in.readString();
+        bangumi_title = in.readString();
+        brief = in.readString();
+        coins = in.readString();
+        copyright = in.readString();
+        cover = in.readString();
+        danmaku_count = in.readString();
+        ed_jump = in.readInt();
+        evaluate = in.readString();
+        favorites = in.readString();
+        is_finish = in.readString();
+        is_started = in.readInt();
+        jp_title = in.readString();
+        limitGroupId = in.readInt();
+        newest_ep_id = in.readString();
+        newest_ep_index = in.readString();
+        payment = in.readParcelable(PaymentBean.class.getClassLoader());
+        play_count = in.readString();
+        pub_time = in.readString();
+        season_id = in.readString();
+        season_status = in.readInt();
+        season_title = in.readString();
+        share_url = in.readString();
+        squareCover = in.readString();
+        staff = in.readString();
+        title = in.readString();
+        total_count = in.readString();
+        user_season = in.readParcelable(UserSeasonBean.class.getClassLoader());
+        version = in.readString();
+        viewRank = in.readInt();
+        vip_quality = in.readInt();
+        watchingCount = in.readString();
+        weekday = in.readString();
+        actor = in.createTypedArrayList(ActorBean.CREATOR);
+        episodes = in.createTypedArrayList(EpisodesBean.CREATOR);
+        recommend_bangumi = in.createTypedArrayList(RecommendBangumiBean.CREATOR);
+        tags = in.createTypedArrayList(TagsBeanX.CREATOR);
+    }
+
+    public static final Creator<BangumiDetailData> CREATOR = new Creator<BangumiDetailData>() {
+        @Override
+        public BangumiDetailData createFromParcel(Parcel in) {
+            return new BangumiDetailData(in);
+        }
+
+        @Override
+        public BangumiDetailData[] newArray(int size) {
+            return new BangumiDetailData[size];
+        }
+    };
 
     public String getAlias() {
         return alias;
@@ -477,7 +486,59 @@ public class BangumiDetailData implements Serializable {
         this.tags = tags;
     }
 
-    public static class PaymentBean {
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(alias);
+        dest.writeString(allow_bp);
+        dest.writeString(allow_download);
+        dest.writeString(area);
+        dest.writeInt(arealimit);
+        dest.writeInt(ban_area_show);
+        dest.writeString(bangumi_id);
+        dest.writeString(bangumi_title);
+        dest.writeString(brief);
+        dest.writeString(coins);
+        dest.writeString(copyright);
+        dest.writeString(cover);
+        dest.writeString(danmaku_count);
+        dest.writeInt(ed_jump);
+        dest.writeString(evaluate);
+        dest.writeString(favorites);
+        dest.writeString(is_finish);
+        dest.writeInt(is_started);
+        dest.writeString(jp_title);
+        dest.writeInt(limitGroupId);
+        dest.writeString(newest_ep_id);
+        dest.writeString(newest_ep_index);
+        dest.writeParcelable(payment, flags);
+        dest.writeString(play_count);
+        dest.writeString(pub_time);
+        dest.writeString(season_id);
+        dest.writeInt(season_status);
+        dest.writeString(season_title);
+        dest.writeString(share_url);
+        dest.writeString(squareCover);
+        dest.writeString(staff);
+        dest.writeString(title);
+        dest.writeString(total_count);
+        dest.writeParcelable(user_season, flags);
+        dest.writeString(version);
+        dest.writeInt(viewRank);
+        dest.writeInt(vip_quality);
+        dest.writeString(watchingCount);
+        dest.writeString(weekday);
+        dest.writeTypedList(actor);
+        dest.writeTypedList(episodes);
+        dest.writeTypedList(recommend_bangumi);
+        dest.writeTypedList(tags);
+    }
+
+    public static class PaymentBean implements Parcelable {
         /**
          * price : 0
          */
@@ -491,9 +552,38 @@ public class BangumiDetailData implements Serializable {
         public void setPrice(String price) {
             this.price = price;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.price);
+        }
+
+        public PaymentBean() {
+        }
+
+        protected PaymentBean(Parcel in) {
+            this.price = in.readString();
+        }
+
+        public static final Parcelable.Creator<PaymentBean> CREATOR = new Parcelable.Creator<PaymentBean>() {
+            @Override
+            public PaymentBean createFromParcel(Parcel source) {
+                return new PaymentBean(source);
+            }
+
+            @Override
+            public PaymentBean[] newArray(int size) {
+                return new PaymentBean[size];
+            }
+        };
     }
 
-    public static class UserSeasonBean {
+    public static class UserSeasonBean implements Parcelable {
         /**
          * attention : 0
          * bp : 0
@@ -547,9 +637,46 @@ public class BangumiDetailData implements Serializable {
         public void setReport_ts(int report_ts) {
             this.report_ts = report_ts;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.attention);
+            dest.writeInt(this.bp);
+            dest.writeString(this.last_ep_index);
+            dest.writeString(this.last_time);
+            dest.writeInt(this.report_ts);
+        }
+
+        public UserSeasonBean() {
+        }
+
+        protected UserSeasonBean(Parcel in) {
+            this.attention = in.readString();
+            this.bp = in.readInt();
+            this.last_ep_index = in.readString();
+            this.last_time = in.readString();
+            this.report_ts = in.readInt();
+        }
+
+        public static final Parcelable.Creator<UserSeasonBean> CREATOR = new Parcelable.Creator<UserSeasonBean>() {
+            @Override
+            public UserSeasonBean createFromParcel(Parcel source) {
+                return new UserSeasonBean(source);
+            }
+
+            @Override
+            public UserSeasonBean[] newArray(int size) {
+                return new UserSeasonBean[size];
+            }
+        };
     }
 
-    public static class ActorBean {
+    public static class ActorBean implements Parcelable {
         /**
          * actor : 松岡禎丞
          * actor_id : 0
@@ -583,9 +710,42 @@ public class BangumiDetailData implements Serializable {
         public void setRole(String role) {
             this.role = role;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.actor);
+            dest.writeInt(this.actor_id);
+            dest.writeString(this.role);
+        }
+
+        public ActorBean() {
+        }
+
+        protected ActorBean(Parcel in) {
+            this.actor = in.readString();
+            this.actor_id = in.readInt();
+            this.role = in.readString();
+        }
+
+        public static final Parcelable.Creator<ActorBean> CREATOR = new Parcelable.Creator<ActorBean>() {
+            @Override
+            public ActorBean createFromParcel(Parcel source) {
+                return new ActorBean(source);
+            }
+
+            @Override
+            public ActorBean[] newArray(int size) {
+                return new ActorBean[size];
+            }
+        };
     }
 
-    public static class EpisodesBean {
+    public static class EpisodesBean implements Parcelable {
         /**
          * av_id : 9854952
          * coins : 12313
@@ -614,7 +774,6 @@ public class BangumiDetailData implements Serializable {
         private String is_webplay;
         private String mid;
         private String page;
-        private UpBean up;
         private String update_time;
         private String webplay_url;
 
@@ -706,14 +865,6 @@ public class BangumiDetailData implements Serializable {
             this.page = page;
         }
 
-        public UpBean getUp() {
-            return up;
-        }
-
-        public void setUp(UpBean up) {
-            this.up = up;
-        }
-
         public String getUpdate_time() {
             return update_time;
         }
@@ -730,11 +881,61 @@ public class BangumiDetailData implements Serializable {
             this.webplay_url = webplay_url;
         }
 
-        public static class UpBean {
+        @Override
+        public int describeContents() {
+            return 0;
         }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.av_id);
+            dest.writeString(this.coins);
+            dest.writeString(this.cover);
+            dest.writeString(this.episode_id);
+            dest.writeInt(this.episode_status);
+            dest.writeString(this.index);
+            dest.writeString(this.index_title);
+            dest.writeString(this.is_new);
+            dest.writeString(this.is_webplay);
+            dest.writeString(this.mid);
+            dest.writeString(this.page);
+            dest.writeString(this.update_time);
+            dest.writeString(this.webplay_url);
+        }
+
+        public EpisodesBean() {
+        }
+
+        protected EpisodesBean(Parcel in) {
+            this.av_id = in.readString();
+            this.coins = in.readString();
+            this.cover = in.readString();
+            this.episode_id = in.readString();
+            this.episode_status = in.readInt();
+            this.index = in.readString();
+            this.index_title = in.readString();
+            this.is_new = in.readString();
+            this.is_webplay = in.readString();
+            this.mid = in.readString();
+            this.page = in.readString();
+            this.update_time = in.readString();
+            this.webplay_url = in.readString();
+        }
+
+        public static final Parcelable.Creator<EpisodesBean> CREATOR = new Parcelable.Creator<EpisodesBean>() {
+            @Override
+            public EpisodesBean createFromParcel(Parcel source) {
+                return new EpisodesBean(source);
+            }
+
+            @Override
+            public EpisodesBean[] newArray(int size) {
+                return new EpisodesBean[size];
+            }
+        };
     }
 
-    public static class RecommendBangumiBean {
+    public static class RecommendBangumiBean implements Parcelable {
         /**
          * bangumi_id : 606
          * cover : http://i0.hdslb.com/bfs/bangumi/ece1d427f23c4167d397a77dc6e96913bf68c547.jpg
@@ -839,7 +1040,7 @@ public class BangumiDetailData implements Serializable {
             this.tags = tags;
         }
 
-        public static class TagsBean {
+        public static class TagsBean implements Parcelable {
             /**
              * cover : http://i0.hdslb.com/bfs/bangumi/596fc0d465852dbda114dffc931d74c8342af3f6.jpg
              * tag_id : 16
@@ -873,10 +1074,90 @@ public class BangumiDetailData implements Serializable {
             public void setTag_name(String tag_name) {
                 this.tag_name = tag_name;
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(this.cover);
+                dest.writeString(this.tag_id);
+                dest.writeString(this.tag_name);
+            }
+
+            public TagsBean() {
+            }
+
+            protected TagsBean(Parcel in) {
+                this.cover = in.readString();
+                this.tag_id = in.readString();
+                this.tag_name = in.readString();
+            }
+
+            public static final Parcelable.Creator<TagsBean> CREATOR = new Parcelable.Creator<TagsBean>() {
+                @Override
+                public TagsBean createFromParcel(Parcel source) {
+                    return new TagsBean(source);
+                }
+
+                @Override
+                public TagsBean[] newArray(int size) {
+                    return new TagsBean[size];
+                }
+            };
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.bangumi_id);
+            dest.writeString(this.cover);
+            dest.writeString(this.follow);
+            dest.writeString(this.isfinish);
+            dest.writeString(this.pub_time);
+            dest.writeString(this.season_id);
+            dest.writeInt(this.season_status);
+            dest.writeString(this.title);
+            dest.writeString(this.total_count);
+            dest.writeTypedList(this.tags);
+        }
+
+        public RecommendBangumiBean() {
+        }
+
+        protected RecommendBangumiBean(Parcel in) {
+            this.bangumi_id = in.readString();
+            this.cover = in.readString();
+            this.follow = in.readString();
+            this.isfinish = in.readString();
+            this.pub_time = in.readString();
+            this.season_id = in.readString();
+            this.season_status = in.readInt();
+            this.title = in.readString();
+            this.total_count = in.readString();
+            this.tags = in.createTypedArrayList(TagsBean.CREATOR);
+        }
+
+        public static final Parcelable.Creator<RecommendBangumiBean> CREATOR = new Parcelable.Creator<RecommendBangumiBean>() {
+            @Override
+            public RecommendBangumiBean createFromParcel(Parcel source) {
+                return new RecommendBangumiBean(source);
+            }
+
+            @Override
+            public RecommendBangumiBean[] newArray(int size) {
+                return new RecommendBangumiBean[size];
+            }
+        };
     }
 
-    public static class TagsBeanX {
+    public static class TagsBeanX implements Parcelable {
         /**
          * cover : http://i0.hdslb.com/bfs/bangumi/0d8dc795344805ed772a9e6d7395bfea78aa9d94.png
          * tag_id : 70
@@ -910,5 +1191,38 @@ public class BangumiDetailData implements Serializable {
         public void setTag_name(String tag_name) {
             this.tag_name = tag_name;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.cover);
+            dest.writeString(this.tag_id);
+            dest.writeString(this.tag_name);
+        }
+
+        public TagsBeanX() {
+        }
+
+        protected TagsBeanX(Parcel in) {
+            this.cover = in.readString();
+            this.tag_id = in.readString();
+            this.tag_name = in.readString();
+        }
+
+        public static final Creator<TagsBeanX> CREATOR = new Creator<TagsBeanX>() {
+            @Override
+            public TagsBeanX createFromParcel(Parcel source) {
+                return new TagsBeanX(source);
+            }
+
+            @Override
+            public TagsBeanX[] newArray(int size) {
+                return new TagsBeanX[size];
+            }
+        };
     }
 }

@@ -34,6 +34,8 @@ public class HomeActivity extends BaseActivity {
     TextView tvUserName;
     @BindView(R.id.ll_menu)
     LinearLayout llMenu;
+    @BindView(R.id.ll_home_button)
+    LinearLayout llHomeButton;
     @BindView(R.id.iv_game)
     ImageView ivGame;
     @BindView(R.id.iv_download)
@@ -76,10 +78,20 @@ public class HomeActivity extends BaseActivity {
                 return tabs.length;
             }
         });
-
+        viewPager.setCurrentItem(1);
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    @Override
+    protected void initToolbar() {
+        super.initToolbar();
+        llMenu.setVisibility(View.VISIBLE);
+        llHomeButton.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 初始化TAB
+     */
     private void initTab() {
         LiveFragment mLiveFragment = new LiveFragment();
         RecommendFragment mRecommendFragment = new RecommendFragment();

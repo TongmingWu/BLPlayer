@@ -3,6 +3,7 @@ package com.tm.blplayer.network;
 import com.tm.blplayer.bean.BangumiDetailData;
 import com.tm.blplayer.bean.BangumiListData;
 import com.tm.blplayer.bean.BaseBean;
+import com.tm.blplayer.bean.CategoryListData;
 import com.tm.blplayer.bean.HomeData;
 import com.tm.blplayer.bean.VideoDetailData;
 import com.tm.blplayer.bean.VideoListData;
@@ -55,4 +56,22 @@ public interface ApiService {
      */
     @GET("/api/v1/search/")
     Observable<BaseBean<VideoListData>> doSearch(@Query("word") String word, @Query("page") int page, @Query("order") String order);
+
+    /**
+     * 分类列表
+     */
+    @GET("/api/v1/category")
+    Observable<BaseBean<CategoryListData>> getCategoryOrder();
+
+    /**
+     * 获取一级分类 如动画
+     */
+    @GET("/api/v1/category/{first_tid}")
+    Observable<BaseBean<?>> getCategoryInfo(@Path("first_tid") String firstTid);
+
+    /**
+     * 获取二级分类
+     */
+    @GET("/api/v1/category/{first_tid}/{second_tid}")
+    Observable<BaseBean<?>> getCategoryInfo(@Path("first_tid") String firstTid, @Path("second_tid") String secondTid);
 }
