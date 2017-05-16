@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="5dp"
+    app:cardElevation=".5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dominantColor"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="96dp">
+
+            <ImageView
+                android:id="@+id/iv_cover"
+                android:layout_width="match_parent"
+                android:layout_height="96dp" />
+
+            <TextView
+                android:id="@+id/tv_play_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/ic_video_plays"
+                android:drawablePadding="3dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_12"
+                tools:text="999" />
+
+            <TextView
+                android:id="@+id/tv_danmaku_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tv_play_count"
+                android:drawableLeft="@drawable/ic_video_danmakus"
+                android:drawablePadding="3dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_12"
+                tools:text="999" />
+
+            <TextView
+                android:id="@+id/tv_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_10"
+                tools:text="03:00" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="8dp"
+            android:textColor="@color/dominantFontColor"
+            android:textSize="@dimen/text_size_14"
+            tools:text="测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

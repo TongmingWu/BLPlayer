@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3b3b3b</color>
-    <color name="colorPrimaryDark">#3b3b3b</color>
+    <color name="colorPrimaryDark">@color/windowBackground</color>
     <color name="colorAccent">#3b3b3b</color>
     <color name="dominantColor">@color/colorPrimary</color>
 
     <color name="windowBackground">#2d2d2d</color>
 
-    <color name="tabNormalColor">#a6a6a6</color>
+    <color name="dominantFontColor">#a6a6a6</color>
+    <color name="tabNormalColor">@color/dominantFontColor</color>
 
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
