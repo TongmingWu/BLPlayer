@@ -160,16 +160,6 @@ public class ApiManager {
             //可以从本地读取cookies发送
             List<Cookie> cookies = cookieStore.get(url.host());
             cookies = cookies != null ? cookies : new ArrayList<Cookie>();
-            for (Cookie cookie : cookies) {
-                Logger.d(cookie.name());
-                Logger.d(cookie.value());
-            }
-            //测试数据
-            Cookie cookie = new Cookie.Builder()
-                    .name("test")
-                    .value("123456")
-                    .build();
-            cookies.add(cookie);
             return cookies;
         }
     }

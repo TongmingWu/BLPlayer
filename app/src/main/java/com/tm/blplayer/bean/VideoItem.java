@@ -43,11 +43,11 @@ public class VideoItem implements Parcelable {
     private String pic;
     private String play;
     private String pubdate;
-    private int review;
+    private String review;
     private String subtitle;
     private String title;
     private int typeid;
-    private int video_review;
+    private String video_review;
 
     public int getAid() {
         return aid;
@@ -145,11 +145,11 @@ public class VideoItem implements Parcelable {
         this.pubdate = pubdate;
     }
 
-    public int getReview() {
+    public String getReview() {
         return review;
     }
 
-    public void setReview(int review) {
+    public void setReview(String review) {
         this.review = review;
     }
 
@@ -177,11 +177,11 @@ public class VideoItem implements Parcelable {
         this.typeid = typeid;
     }
 
-    public int getVideo_review() {
+    public String getVideo_review() {
         return video_review;
     }
 
-    public void setVideo_review(int video_review) {
+    public void setVideo_review(String video_review) {
         this.video_review = video_review;
     }
 
@@ -227,11 +227,11 @@ public class VideoItem implements Parcelable {
         dest.writeString(this.pic);
         dest.writeString(this.play);
         dest.writeString(this.pubdate);
-        dest.writeInt(this.review);
+        dest.writeString(this.review);
         dest.writeString(this.subtitle);
         dest.writeString(this.title);
         dest.writeInt(this.typeid);
-        dest.writeInt(this.video_review);
+        dest.writeString(this.video_review);
     }
 
     public VideoItem() {
@@ -250,11 +250,11 @@ public class VideoItem implements Parcelable {
         this.pic = in.readString();
         this.play = in.readString();
         this.pubdate = in.readString();
-        this.review = in.readInt();
+        this.review = in.readString();
         this.subtitle = in.readString();
         this.title = in.readString();
         this.typeid = in.readInt();
-        this.video_review = in.readInt();
+        this.video_review = in.readString();
     }
 
     public static final Parcelable.Creator<VideoItem> CREATOR = new Parcelable.Creator<VideoItem>() {

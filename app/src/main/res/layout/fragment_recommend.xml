@@ -3,31 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/refresh_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/windowBackground"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/windowBackground"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <com.yyydjk.library.BannerLayout
-            android:id="@+id/banner"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:background="@color/white"
-            app:autoPlayDuration="5000"
-            app:imageScaleType="centerCrop"
-            app:indicatorMargin="10dp"
-            app:indicatorPosition="rightBottom"
-            app:indicatorShape="oval"
-            app:indicatorSpace="3dp"
-            app:scrollDuration="900"
-            app:selectedIndicatorColor="?attr/colorAccent"
-            app:selectedIndicatorHeight="5dp"
-            app:selectedIndicatorWidth="5dp"
-            app:unSelectedIndicatorColor="#99ffffff"
-            app:unSelectedIndicatorHeight="6dp"
-            app:unSelectedIndicatorWidth="6dp" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.yyydjk.library.BannerLayout
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@color/windowBackground"
+                app:autoPlayDuration="5000"
+                app:imageScaleType="centerCrop"
+                app:indicatorMargin="10dp"
+                app:indicatorPosition="rightBottom"
+                app:indicatorShape="oval"
+                app:indicatorSpace="3dp"
+                app:scrollDuration="900"
+                app:selectedIndicatorColor="?attr/colorAccent"
+                app:selectedIndicatorHeight="5dp"
+                app:selectedIndicatorWidth="5dp"
+                app:unSelectedIndicatorColor="#99ffffff"
+                app:unSelectedIndicatorHeight="6dp"
+                app:unSelectedIndicatorWidth="6dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recommend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 </android.support.v4.widget.SwipeRefreshLayout>

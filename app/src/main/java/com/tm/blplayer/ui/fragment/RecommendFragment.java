@@ -4,22 +4,28 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.tm.blplayer.R;
 import com.tm.blplayer.bean.BannerItem;
 import com.tm.blplayer.bean.HomeData;
+import com.tm.blplayer.bean.VideoItem;
 import com.tm.blplayer.mvp.presenter.RecommendPresenter;
 import com.tm.blplayer.mvp.view.BaseView;
+import com.tm.blplayer.ui.adapter.VideoCardAdapter;
 import com.tm.blplayer.utils.CommonUtil;
 import com.tm.blplayer.utils.ToastUtils;
+import com.tm.blplayer.widget.GridSpacingItemDecoration;
 import com.yyydjk.library.BannerLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.Unbinder;
 
 /**
  * @author wutongming
@@ -33,8 +39,15 @@ public class RecommendFragment extends BaseFragment implements BaseView {
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.banner)
     BannerLayout mBannerLayout;
+    @BindView(R.id.rv_recommend)
+    RecyclerView mRecyclerView;
+
+    Unbinder unbinder;
+
+    private List<VideoItem> mData = new ArrayList<>();
 
     private RecommendPresenter mRecommendPresenter;
+    private VideoCardAdapter mAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -45,6 +58,7 @@ public class RecommendFragment extends BaseFragment implements BaseView {
     protected void initView() {
         initRefreshLayout();
         initBannerLayout();
+        initRecyclerView();
     }
 
     @Override
@@ -74,6 +88,18 @@ public class RecommendFragment extends BaseFragment implements BaseView {
         ViewGroup.LayoutParams params = mBannerLayout.getLayoutParams();
         params.height = width / 2;
         mBannerLayout.setLayoutParams(params);
+    }
+
+    /**
+     * 初始化RecyclerView
+     */
+    private void initRecyclerView() {
+        GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
+        mAdapter = new VideoCardAdapter(getActivity(), mData);
+        mRecyclerView.setLayoutManager(manager);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setNestedScrollingEnabled(false);
+        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 30, true));
     }
 
     /**
@@ -110,13 +136,18 @@ public class RecommendFragment extends BaseFragment implements BaseView {
     public void onNetworkSuccess(Object result) {
         toggleRefresh(false);
         HomeData data = (HomeData) result;
-        mBannerLayout.setViewUrls(filterBannerUrls(data.getBanner()));
-        mBannerLayout.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-
-            }
-        });
+        if (data != null && data.getVideo_list().size() > 0) {
+            mBannerLayout.setViewUrls(filterBannerUrls(data.getBanner()));
+            mBannerLayout.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    // TODO: 2017/5/17 banner点击跳转
+                }
+            });
+            mData.clear();
+            mData.addAll(data.getVideo_list());
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -148,5 +179,6 @@ public class RecommendFragment extends BaseFragment implements BaseView {
         if (mRecommendPresenter != null) {
             mRecommendPresenter.onDetach();
         }
+        unbinder.unbind();
     }
 }

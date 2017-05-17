@@ -2,7 +2,7 @@ package com.tm.blplayer.mvp.model;
 
 import com.tm.blplayer.listener.OnNetworkCallBackListener;
 import com.tm.blplayer.network.ApiManager;
-import com.tm.blplayer.mvp.observer.NetworkObserver;
+import com.tm.blplayer.observer.NetworkObserver;
 
 import java.util.Map;
 

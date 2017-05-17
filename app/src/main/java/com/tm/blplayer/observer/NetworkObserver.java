@@ -1,4 +1,4 @@
-package com.tm.blplayer.mvp.observer;
+package com.tm.blplayer.observer;
 
 import com.orhanobut.logger.Logger;
 import com.tm.blplayer.bean.BaseBean;
