@@ -41,7 +41,7 @@ public class VideoItem implements Parcelable {
     private int favorites;
     private int mid;
     private String pic;
-    private int play;
+    private String play;
     private String pubdate;
     private int review;
     private String subtitle;
@@ -129,11 +129,11 @@ public class VideoItem implements Parcelable {
         this.pic = pic;
     }
 
-    public int getPlay() {
+    public String getPlay() {
         return play;
     }
 
-    public void setPlay(int play) {
+    public void setPlay(String play) {
         this.play = play;
     }
 
@@ -225,7 +225,7 @@ public class VideoItem implements Parcelable {
         dest.writeInt(this.favorites);
         dest.writeInt(this.mid);
         dest.writeString(this.pic);
-        dest.writeInt(this.play);
+        dest.writeString(this.play);
         dest.writeString(this.pubdate);
         dest.writeInt(this.review);
         dest.writeString(this.subtitle);
@@ -248,7 +248,7 @@ public class VideoItem implements Parcelable {
         this.favorites = in.readInt();
         this.mid = in.readInt();
         this.pic = in.readString();
-        this.play = in.readInt();
+        this.play = in.readString();
         this.pubdate = in.readString();
         this.review = in.readInt();
         this.subtitle = in.readString();

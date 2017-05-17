@@ -1,6 +1,25 @@
 package com.tm.blplayer.ui.fragment;
 
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.tm.blplayer.R;
+import com.tm.blplayer.bean.BannerItem;
+import com.tm.blplayer.bean.HomeData;
+import com.tm.blplayer.mvp.presenter.RecommendPresenter;
+import com.tm.blplayer.mvp.view.BaseView;
+import com.tm.blplayer.utils.CommonUtil;
+import com.tm.blplayer.utils.ToastUtils;
+import com.yyydjk.library.BannerLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * @author wutongming
@@ -8,7 +27,15 @@ import com.tm.blplayer.R;
  * @since 2017/4/18
  */
 
-public class RecommendFragment extends BaseFragment {
+public class RecommendFragment extends BaseFragment implements BaseView {
+
+    @BindView(R.id.refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.banner)
+    BannerLayout mBannerLayout;
+
+    private RecommendPresenter mRecommendPresenter;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_recommend;
@@ -16,6 +43,110 @@ public class RecommendFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        initRefreshLayout();
+        initBannerLayout();
+    }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        createPresenter();
+        getData();
+    }
+
+    /**
+     * 初始化刷新控件
+     */
+    private void initRefreshLayout() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+            }
+        });
+    }
+
+    /**
+     * 根据手机分辨率设置bannerLayout大小  -->  图片比例2:1
+     */
+    private void initBannerLayout() {
+        int width = CommonUtil.getScreenWidth(getActivity());
+        ViewGroup.LayoutParams params = mBannerLayout.getLayoutParams();
+        params.height = width / 2;
+        mBannerLayout.setLayoutParams(params);
+    }
+
+    /**
+     * 刷新控件开关
+     */
+    private void toggleRefresh(final boolean refresh) {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(refresh);
+            }
+        });
+    }
+
+    /**
+     * 创建presenter
+     */
+    private void createPresenter() {
+        if (mRecommendPresenter == null) {
+            mRecommendPresenter = new RecommendPresenter();
+        }
+        mRecommendPresenter.onAttach(this);
+    }
+
+    /**
+     * 获取数据
+     */
+    private void getData() {
+        toggleRefresh(true);
+        mRecommendPresenter.requestData(null);
+    }
+
+    @Override
+    public void onNetworkSuccess(Object result) {
+        toggleRefresh(false);
+        HomeData data = (HomeData) result;
+        mBannerLayout.setViewUrls(filterBannerUrls(data.getBanner()));
+        mBannerLayout.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        });
+    }
+
+    /**
+     * 清洗banner中的url
+     */
+    private List<String> filterBannerUrls(List<BannerItem> bannerItemList) {
+        List<String> result = new ArrayList<>();
+        for (BannerItem item : bannerItemList) {
+            result.add(item.getPic());
+        }
+        return result;
+    }
+
+    @Override
+    public void onNetworkFailed(int code, String errorMsg) {
+        toggleRefresh(false);
+        ToastUtils.showShortToast(getActivity(), errorMsg);
+    }
+
+    @Override
+    public void onNetworkError(String error) {
+        toggleRefresh(false);
+        ToastUtils.showShortToast(getActivity(), error);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mRecommendPresenter != null) {
+            mRecommendPresenter.onDetach();
+        }
     }
 }

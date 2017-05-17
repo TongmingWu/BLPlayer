@@ -33,7 +33,6 @@
                 android:drawableLeft="@drawable/ic_video_plays"
                 android:drawablePadding="3dp"
                 android:textColor="@color/white"
-
                 android:textSize="@dimen/text_size_12"
                 tools:text="999" />
 

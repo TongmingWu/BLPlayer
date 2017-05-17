@@ -19,7 +19,7 @@ public class PathConstants {
     /**
      * 缓存文件路径
      */
-    public final static String CACHE = BLApplication.getContext().getCacheDir().getAbsolutePath();
+    public final static String CACHE = BLApplication.getInstance().getCacheDir().getAbsolutePath();
 
     /**
      * HTTP缓存文件存储路径

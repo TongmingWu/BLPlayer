@@ -350,7 +350,7 @@ public class BannerLayout extends RelativeLayout {
         //初始化pager
         pager = new ViewPager(getContext());
         //添加切换动画
-        pager.setPageTransformer(true, new ViewPager.PageTransformer() {
+        /*pager.setPageTransformer(true, new ViewPager.PageTransformer() {
             private static final float MIN_SCALE = 0.85f;
             private static final float MIN_ALPHA = 0.5f;
 
@@ -375,7 +375,7 @@ public class BannerLayout extends RelativeLayout {
                 }
             }
 
-        });
+        });*/
         //添加viewpager到SliderLayout
         addView(pager);
         setSliderTransformDuration(scrollDuration);

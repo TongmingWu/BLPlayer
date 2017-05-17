@@ -11,16 +11,16 @@ import android.content.Context;
 
 public class BLApplication extends Application {
 
-    private static BLApplication instance;
+    private static Context instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        instance = this;
+        instance = getApplicationContext();
     }
 
-    public static Context getContext() {
+    public static Context getInstance() {
         return instance;
     }
 }

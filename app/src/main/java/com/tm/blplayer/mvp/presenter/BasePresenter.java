@@ -1,7 +1,5 @@
 package com.tm.blplayer.mvp.presenter;
 
-import android.os.Bundle;
-
 import com.tm.blplayer.bean.BaseBean;
 import com.tm.blplayer.listener.OnNetworkCallBackListener;
 import com.tm.blplayer.mvp.view.BaseView;
@@ -10,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import rx.Subscription;
+import io.reactivex.disposables.Disposable;
 
 /**
  * @author wutongming
@@ -20,7 +18,7 @@ import rx.Subscription;
 
 public abstract class BasePresenter<T extends BaseView> implements OnNetworkCallBackListener {
 
-    private List<Subscription> subscriptionList;
+    private List<Disposable> disposableList;
 
     private T mView;
 
@@ -29,7 +27,7 @@ public abstract class BasePresenter<T extends BaseView> implements OnNetworkCall
      */
     public void onAttach(T view) {
         this.mView = view;
-        subscriptionList = new ArrayList<>();
+        disposableList = new ArrayList<>();
     }
 
     /**
@@ -37,20 +35,15 @@ public abstract class BasePresenter<T extends BaseView> implements OnNetworkCall
      */
     public void onDetach() {
         mView = null;
-        if (subscriptionList != null && subscriptionList.size() > 0) {
+        if (disposableList != null && disposableList.size() > 0) {
             //解绑
-            for (Subscription subscription : subscriptionList) {
-                if (!subscription.isUnsubscribed()) {
-                    subscription.unsubscribe();
+            for (Disposable disposable : disposableList) {
+                if (!disposable.isDisposed()) {
+                    disposable.dispose();
                 }
             }
         }
     }
-
-    /**
-     * 容易被回收掉时保存数据
-     */
-    public abstract void onSaveInstanceState(Bundle outState);
 
     /**
      * 获取数据操作
@@ -62,14 +55,14 @@ public abstract class BasePresenter<T extends BaseView> implements OnNetworkCall
     /**
      * 添加subscription
      */
-    protected void addSubscription(Subscription subscription) {
-        if (subscriptionList != null) {
-            subscriptionList.add(subscription);
+    protected void addDisposable(Disposable disposable) {
+        if (disposableList != null) {
+            disposableList.add(disposable);
         }
     }
 
     @Override
-    public void onNetworkRequestSuccess(BaseBean<Object> response) {
+    public void onNetworkRequestSuccess(BaseBean<?> response) {
         if (mView != null && response != null) {
             Object result = response.getResult();
             mView.onNetworkSuccess(result);

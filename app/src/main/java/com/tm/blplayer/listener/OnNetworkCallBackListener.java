@@ -15,7 +15,7 @@ public interface OnNetworkCallBackListener {
      *
      * @param response 返回数据结果
      */
-    void onNetworkRequestSuccess(BaseBean<Object> response);
+    void onNetworkRequestSuccess(BaseBean<?> response);
 
     /**
      * 网络请求服务器失败

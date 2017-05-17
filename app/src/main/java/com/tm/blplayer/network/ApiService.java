@@ -8,10 +8,10 @@ import com.tm.blplayer.bean.HomeData;
 import com.tm.blplayer.bean.VideoDetailData;
 import com.tm.blplayer.bean.VideoListData;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import rx.Observable;
 
 /**
  * @author wutongming

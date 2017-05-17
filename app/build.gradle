@@ -42,6 +42,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile project(':libraries:BannerLayout')
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.android.support:design:25.1.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -67,13 +68,6 @@ dependencies {
     compile 'com.trello.rxlifecycle2:rxlifecycle:2.0.1'
     compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.0.1'
     compile 'com.trello:rxlifecycle-components:1.0'
-
-    //rx事件绑定
-    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.0.0'
 
     //ButterKnife
     compile 'com.jakewharton:butterknife:8.5.1'

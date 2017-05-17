@@ -14,15 +14,22 @@ import com.tm.blplayer.bean.VideoListData;
 import com.tm.blplayer.url.PrefixUrl;
 import com.tm.blplayer.utils.CommonUtil;
 import com.tm.blplayer.utils.constants.Constants;
-import com.tm.blplayer.utils.constants.PathConstants;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -30,7 +37,6 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
 
 /**
  * @author wutongming
@@ -49,8 +55,8 @@ public class ApiManager {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(PrefixUrl.BASE_URL)
                 .client(getOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
         apiService = retrofit.create(ApiService.class);
     }
@@ -71,9 +77,10 @@ public class ApiManager {
      */
     private OkHttpClient getOkHttpClient() {
         if (mOkHttpClient == null) {
-            Cache cache = new Cache(new File(PathConstants.CACHE_HTTP), Constants.HTTP_CACHE_SIZE);
+            Cache cache = new Cache(new File(BLApplication.getInstance().getCacheDir(), "http"), Constants.HTTP_CACHE_SIZE);
             mOkHttpClient = new OkHttpClient.Builder()
                     .cache(cache)
+                    .cookieJar(new BlCookiesJar())
                     .addInterceptor(mRewriteCacheControlInterceptor)
                     .addInterceptor(new LogInterceptor())
                     .addNetworkInterceptor(mRewriteCacheControlInterceptor)
@@ -90,7 +97,7 @@ public class ApiManager {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
-            Context context = BLApplication.getContext();
+            Context context = BLApplication.getInstance();
             if (!CommonUtil.isNet(context)) {
                 request = request.newBuilder()
                         .cacheControl(CacheControl.FORCE_CACHE)
@@ -131,6 +138,39 @@ public class ApiManager {
             return response.newBuilder()
                     .body(okhttp3.ResponseBody.create(mediaType, content))
                     .build();
+        }
+    }
+
+    /**
+     * cookies管理器
+     */
+    private static class BlCookiesJar implements CookieJar {
+
+        private Map<String, List<Cookie>> cookieStore = new HashMap<>();
+
+        @Override
+        public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+            //可以保存cookies到本地
+            Logger.d("host = " + url.host());
+            cookieStore.put(url.host(), cookies);
+        }
+
+        @Override
+        public List<Cookie> loadForRequest(HttpUrl url) {
+            //可以从本地读取cookies发送
+            List<Cookie> cookies = cookieStore.get(url.host());
+            cookies = cookies != null ? cookies : new ArrayList<Cookie>();
+            for (Cookie cookie : cookies) {
+                Logger.d(cookie.name());
+                Logger.d(cookie.value());
+            }
+            //测试数据
+            Cookie cookie = new Cookie.Builder()
+                    .name("test")
+                    .value("123456")
+                    .build();
+            cookies.add(cookie);
+            return cookies;
         }
     }
 
