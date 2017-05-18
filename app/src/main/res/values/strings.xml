@@ -9,6 +9,8 @@
     <!--VideoDetailActivity-->
     <string name="video_detail_av">av%s</string>
     <string name="video_detail_play_now">立即播放</string>
+    <string name="video_detail_download">缓存</string>
+    <string name="video_detail_attention">关注</string>
     <array name="video_detail_tab">
         <item>简介</item>
         <item>评论(%s)</item>
