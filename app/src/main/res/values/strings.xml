@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">BLPlayer</string>
 
+    <!--HomeActivity-->
     <string name="home_no_login">未登录</string>
     <string name="home_exit_hint">再按一次退出</string>
     <string name="home_video_count">%s万</string>
+
+    <!--VideoDetailActivity-->
+    <string name="video_detail_av">av%s</string>
+    <string name="video_detail_play_now">立即播放</string>
+    <array name="video_detail_tab">
+        <item>简介</item>
+        <item>评论(%s)</item>
+    </array>
 
 </resources>

@@ -2,14 +2,19 @@
 <resources>
     <color name="colorPrimary">#3b3b3b</color>
     <color name="colorPrimaryDark">@color/windowBackground</color>
-    <color name="colorAccent">#3b3b3b</color>
+    <color name="colorAccent">@color/colorPrimaryDark</color>
     <color name="dominantColor">@color/colorPrimary</color>
 
     <color name="windowBackground">#2d2d2d</color>
 
     <color name="dominantFontColor">#a6a6a6</color>
+    <color name="secondaryFontColor01">#515151</color>
+    
     <color name="tabNormalColor">@color/dominantFontColor</color>
 
+    <color name="alphaBlack">#33000000</color>
+
+    <color name="transparent">#0000</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
 </resources>

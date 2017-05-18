@@ -62,6 +62,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void initView() {
         initTab();
+        viewPager.setOffscreenPageLimit(tabs.length);
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -94,7 +95,7 @@ public class HomeActivity extends BaseActivity {
 
             }
         });
-        
+
         viewPager.setCurrentItem(1);
         tabLayout.setupWithViewPager(viewPager);
     }

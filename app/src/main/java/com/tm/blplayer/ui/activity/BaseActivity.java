@@ -2,6 +2,7 @@ package com.tm.blplayer.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -48,6 +49,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     /**
      * LayoutId
      */
+    @LayoutRes
     protected abstract int getLayoutId();
 
     /**
@@ -59,7 +61,10 @@ public abstract class BaseActivity extends RxAppCompatActivity {
      * Toolbar统一处理
      */
     protected void initToolbar() {
-
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
     }
 
     @OnClick({R.id.ll_back, R.id.ll_cancel})

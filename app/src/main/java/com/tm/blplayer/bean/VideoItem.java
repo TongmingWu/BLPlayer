@@ -31,7 +31,7 @@ public class VideoItem implements Parcelable {
      * video_review : 1
      */
 
-    private int aid;
+    private String aid;
     private String author;
     private int coins;
     private String create;
@@ -49,11 +49,11 @@ public class VideoItem implements Parcelable {
     private int typeid;
     private String video_review;
 
-    public int getAid() {
+    public String getAid() {
         return aid;
     }
 
-    public void setAid(int aid) {
+    public void setAid(String aid) {
         this.aid = aid;
     }
 
@@ -215,7 +215,7 @@ public class VideoItem implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.aid);
+        dest.writeString(this.aid);
         dest.writeString(this.author);
         dest.writeInt(this.coins);
         dest.writeString(this.create);
@@ -238,7 +238,7 @@ public class VideoItem implements Parcelable {
     }
 
     protected VideoItem(Parcel in) {
-        this.aid = in.readInt();
+        this.aid = in.readString();
         this.author = in.readString();
         this.coins = in.readInt();
         this.create = in.readString();

@@ -5,25 +5,32 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="@color/dominantColor"
+    app:cardCornerRadius="8dp"
     app:cardElevation="1dp">
 
     <LinearLayout
         android:id="@+id/ll_video_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dominantColor"
+        android:background="?android:attr/selectableItemBackground"
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/rl_cover"
             android:layout_width="match_parent"
-            android:layout_height="96dp">
+            android:layout_height="104dp">
 
             <ImageView
                 android:id="@+id/iv_cover"
                 android:layout_width="match_parent"
-                android:layout_height="96dp" />
+                android:layout_height="104dp" />
+
+            <!--为图片加上暗黑效果-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/alphaBlack" />
 
             <TextView
                 android:id="@+id/tv_play_count"
@@ -31,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
                 android:drawableLeft="@drawable/ic_video_plays"
                 android:drawablePadding="3dp"
                 android:textColor="@color/white"

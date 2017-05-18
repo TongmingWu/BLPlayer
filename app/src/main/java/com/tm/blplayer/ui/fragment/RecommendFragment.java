@@ -1,5 +1,6 @@
 package com.tm.blplayer.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -9,15 +10,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.orhanobut.logger.Logger;
 import com.tm.blplayer.R;
 import com.tm.blplayer.bean.BannerItem;
 import com.tm.blplayer.bean.HomeData;
 import com.tm.blplayer.bean.VideoItem;
+import com.tm.blplayer.listener.OnItemClickListener;
 import com.tm.blplayer.mvp.presenter.RecommendPresenter;
 import com.tm.blplayer.mvp.view.BaseView;
+import com.tm.blplayer.ui.activity.VideoDetailActivity;
 import com.tm.blplayer.ui.adapter.VideoCardAdapter;
 import com.tm.blplayer.utils.CommonUtil;
 import com.tm.blplayer.utils.ToastUtils;
+import com.tm.blplayer.utils.constants.Constants;
 import com.tm.blplayer.widget.GridSpacingItemDecoration;
 import com.yyydjk.library.BannerLayout;
 
@@ -25,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * @author wutongming
@@ -41,8 +45,6 @@ public class RecommendFragment extends BaseFragment implements BaseView {
     BannerLayout mBannerLayout;
     @BindView(R.id.rv_recommend)
     RecyclerView mRecyclerView;
-
-    Unbinder unbinder;
 
     private List<VideoItem> mData = new ArrayList<>();
 
@@ -96,10 +98,21 @@ public class RecommendFragment extends BaseFragment implements BaseView {
     private void initRecyclerView() {
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
         mAdapter = new VideoCardAdapter(getActivity(), mData);
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(Object object, int position) {
+                VideoItem item = (VideoItem) object;
+                if (item != null) {
+                    Intent intent = new Intent(getActivity(), VideoDetailActivity.class);
+                    intent.putExtra(Constants.VIDEO_AID, item.getAid());
+                    startActivity(intent);
+                }
+            }
+        });
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 30, true));
+        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, Constants.CARD_MARGIN, true));
     }
 
     /**
@@ -147,6 +160,9 @@ public class RecommendFragment extends BaseFragment implements BaseView {
             mData.clear();
             mData.addAll(data.getVideo_list());
             mAdapter.notifyDataSetChanged();
+        } else {
+            //空处理
+            Logger.e("获取不到数据");
         }
     }
 
@@ -179,6 +195,5 @@ public class RecommendFragment extends BaseFragment implements BaseView {
         if (mRecommendPresenter != null) {
             mRecommendPresenter.onDetach();
         }
-        unbinder.unbind();
     }
 }

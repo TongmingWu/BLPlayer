@@ -5,13 +5,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.orhanobut.logger.Logger;
 import com.tm.blplayer.R;
 import com.tm.blplayer.bean.VideoItem;
 import com.tm.blplayer.listener.OnItemClickListener;
+import com.tm.blplayer.utils.CommonUtil;
 import com.tm.blplayer.utils.StringUtils;
+import com.tm.blplayer.utils.constants.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +33,19 @@ public class VideoCardAdapter extends RecyclerView.Adapter<VideoCardAdapter.Vide
 
     private List<VideoItem> mData = new ArrayList<>();
     private Context mContext;
+    /**
+     * 单击监听
+     */
     private OnItemClickListener mOnItemClickListener;
+    /**
+     * 屏幕宽度
+     */
+    private int mWidth;
 
     public VideoCardAdapter(Context mContext, List<VideoItem> mData) {
         this.mData = mData;
         this.mContext = mContext;
+        this.mWidth = CommonUtil.getScreenWidth(mContext);
     }
 
     @Override
@@ -41,6 +53,17 @@ public class VideoCardAdapter extends RecyclerView.Adapter<VideoCardAdapter.Vide
         View inflate = View.inflate(mContext, R.layout.adapter_video_card, null);
         inflate.setOnClickListener(this);
         VideoCardViewHolder holder = new VideoCardViewHolder(inflate);
+        //处理屏幕适配问题
+        ViewGroup.LayoutParams params = holder.ivCover.getLayoutParams();
+        ViewGroup.LayoutParams rlParams = holder.rlCover.getLayoutParams();
+        int width = (int) (mWidth / 2 - Constants.CARD_MARGIN * 1.5);
+        int height = (int) (width / 1.6f);
+        params.width = width;
+        params.height = height;
+        holder.ivCover.setLayoutParams(params);
+        rlParams.width = width;
+        rlParams.height = height;
+        holder.rlCover.setLayoutParams(rlParams);
         return holder;
     }
 
@@ -51,26 +74,28 @@ public class VideoCardAdapter extends RecyclerView.Adapter<VideoCardAdapter.Vide
         holder.itemView.setTag(R.id.card_view, position);
         String play = videoItem.getPlay();
         try {
-            float temp = Float.parseFloat(play);
+            int temp = Integer.parseInt(play);
             if (temp > 10000.0f) {         //如果大于一万的话则以0.0的计数方式
                 play = mContext.getResources().getString(R.string.home_video_count, StringUtils.DecimalFormat(temp / 10000.0f));
             }
         } catch (NumberFormatException e) {
-            play = "0";
+            //出现问题的值为 "--"
+            Logger.e("数字转换异常,当前play = " + play);
         }
         String review = videoItem.getVideo_review();
         try {
-            float temp = Float.parseFloat(play);
+            int temp = Integer.parseInt(review);
             if (temp > 10000.0f) {         //如果大于一万的话则以0.0的计数方式
                 review = mContext.getResources().getString(R.string.home_video_count, StringUtils.DecimalFormat(temp / 10000.0f));
             }
         } catch (NumberFormatException e) {
-            review = "0";
+            Logger.e("数字转换异常,当前review = " + review);
         }
 
         Glide.with(mContext)
                 .load(videoItem.getPic())
                 .placeholder(R.drawable.ic_default_image)
+                .centerCrop()
                 .dontAnimate()
                 .into(holder.ivCover);
 
@@ -98,6 +123,8 @@ public class VideoCardAdapter extends RecyclerView.Adapter<VideoCardAdapter.Vide
 
     class VideoCardViewHolder extends RecyclerView.ViewHolder {
         View itemView;
+        @BindView(R.id.rl_cover)
+        RelativeLayout rlCover;
         @BindView(R.id.iv_cover)
         ImageView ivCover;
         @BindView(R.id.tv_play_count)

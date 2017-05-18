@@ -12,7 +12,7 @@ public class Constants {
     /**
      * http短缓存时间
      */
-    public static final int HTTP_CACHE_STALE_SHORT = 120;
+    public static final int HTTP_CACHE_STALE_SHORT = 10;
 
     /**
      * http长缓存时间
@@ -29,4 +29,13 @@ public class Constants {
      */
     public static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
 
+    /**
+     * 视频卡片间距
+     */
+    public static final int CARD_MARGIN = 30;
+
+    /**
+     * 视频aid
+     */
+    public static final String VIDEO_AID = "video_aid";
 }

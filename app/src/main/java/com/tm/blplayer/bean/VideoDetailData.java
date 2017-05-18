@@ -396,16 +396,16 @@ public class VideoDetailData implements Parcelable {
                  * next_exp : 10800
                  */
 
-                private int current_exp;
+                private String current_exp;
                 private int current_level;
                 private int current_min;
-                private int next_exp;
+                private String next_exp;
 
-                public int getCurrent_exp() {
+                public String getCurrent_exp() {
                     return current_exp;
                 }
 
-                public void setCurrent_exp(int current_exp) {
+                public void setCurrent_exp(String current_exp) {
                     this.current_exp = current_exp;
                 }
 
@@ -425,11 +425,11 @@ public class VideoDetailData implements Parcelable {
                     this.current_min = current_min;
                 }
 
-                public int getNext_exp() {
+                public String getNext_exp() {
                     return next_exp;
                 }
 
-                public void setNext_exp(int next_exp) {
+                public void setNext_exp(String next_exp) {
                     this.next_exp = next_exp;
                 }
 
@@ -440,20 +440,20 @@ public class VideoDetailData implements Parcelable {
 
                 @Override
                 public void writeToParcel(Parcel dest, int flags) {
-                    dest.writeInt(this.current_exp);
+                    dest.writeString(this.current_exp);
                     dest.writeInt(this.current_level);
                     dest.writeInt(this.current_min);
-                    dest.writeInt(this.next_exp);
+                    dest.writeString(this.next_exp);
                 }
 
                 public LevelInfoBean() {
                 }
 
                 protected LevelInfoBean(Parcel in) {
-                    this.current_exp = in.readInt();
+                    this.current_exp = in.readString();
                     this.current_level = in.readInt();
                     this.current_min = in.readInt();
-                    this.next_exp = in.readInt();
+                    this.next_exp = in.readString();
                 }
 
                 public static final Parcelable.Creator<LevelInfoBean> CREATOR = new Parcelable.Creator<LevelInfoBean>() {
@@ -724,7 +724,7 @@ public class VideoDetailData implements Parcelable {
 
                 private int accessStatus;
                 private String dueRemark;
-                private int vipDueDate;
+                private long vipDueDate;
                 private int vipStatus;
                 private String vipStatusWarn;
                 private int vipType;
@@ -745,11 +745,11 @@ public class VideoDetailData implements Parcelable {
                     this.dueRemark = dueRemark;
                 }
 
-                public int getVipDueDate() {
+                public long getVipDueDate() {
                     return vipDueDate;
                 }
 
-                public void setVipDueDate(int vipDueDate) {
+                public void setVipDueDate(long vipDueDate) {
                     this.vipDueDate = vipDueDate;
                 }
 
@@ -786,7 +786,7 @@ public class VideoDetailData implements Parcelable {
                 public void writeToParcel(Parcel dest, int flags) {
                     dest.writeInt(this.accessStatus);
                     dest.writeString(this.dueRemark);
-                    dest.writeInt(this.vipDueDate);
+                    dest.writeLong(this.vipDueDate);
                     dest.writeInt(this.vipStatus);
                     dest.writeString(this.vipStatusWarn);
                     dest.writeInt(this.vipType);
@@ -798,7 +798,7 @@ public class VideoDetailData implements Parcelable {
                 protected VipBean(Parcel in) {
                     this.accessStatus = in.readInt();
                     this.dueRemark = in.readString();
-                    this.vipDueDate = in.readInt();
+                    this.vipDueDate = in.readLong();
                     this.vipStatus = in.readInt();
                     this.vipStatusWarn = in.readString();
                     this.vipType = in.readInt();

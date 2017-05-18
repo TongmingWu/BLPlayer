@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dominantFontColor"
+        android:textSize="@dimen/text_size_14"
+        tools:text="测试测试测试测试测试测试测试测试测试测试测试测试测试测试" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="13.5dp"
+            android:background="@drawable/ic_info_views"
+            android:backgroundTint="@color/secondaryFontColor01" />
+
+        <TextView
+            android:id="@+id/tv_play_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/secondaryFontColor01"
+            android:textSize="@dimen/text_size_12"
+            tools:text="999" />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="13.5dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/ic_info_danmakus"
+            android:backgroundTint="@color/secondaryFontColor01" />
+
+        <TextView
+            android:id="@+id/tv_danmaku_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/secondaryFontColor01"
+            android:textSize="@dimen/text_size_12"
+            tools:text="999" />
+    </LinearLayout>
+
+</LinearLayout>
