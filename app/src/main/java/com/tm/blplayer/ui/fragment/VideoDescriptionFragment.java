@@ -1,5 +1,7 @@
 package com.tm.blplayer.ui.fragment;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -7,10 +9,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.tm.blplayer.R;
 import com.tm.blplayer.bean.VideoDetailData;
+import com.tm.blplayer.bean.VideoItem;
+import com.tm.blplayer.utils.StringUtils;
+import com.tm.blplayer.utils.TimeUtils;
 import com.tm.blplayer.widget.GlideCircleTransform;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,6 +53,8 @@ public class VideoDescriptionFragment extends BaseFragment {
     TextView tvUpTime;
     @BindView(R.id.flow_layout)
     TagFlowLayout flowLayout;
+    @BindView(R.id.recycler_view)
+    RecyclerView mRecyclerView;
 
     @Override
     protected int getLayoutId() {
@@ -63,16 +72,22 @@ public class VideoDescriptionFragment extends BaseFragment {
         VideoDetailData.PlayInfoBean playInfo = data.getPlay_info();
         VideoDetailData.AuthorInfoBean authorInfo = data.getAuthor_info();
         if (playInfo != null) {
-            tvPlayCount.setText(String.valueOf(playInfo.getView()));
-            tvDanmakuCount.setText(String.valueOf(playInfo.getDanmaku()));
-            tvShare.setText(String.valueOf(playInfo.getShare()));
-            tvCoin.setText(String.valueOf(playInfo.getCoin()));
-            tvCollect.setText(String.valueOf(playInfo.getFavorite()));
+            int viewCount = playInfo.getView();
+            int danmakuCount = playInfo.getDanmaku();
+            int shareCount = playInfo.getShare();
+            int coinCount = playInfo.getCoin();
+            int favoriteCount = playInfo.getFavorite();
+
+            tvPlayCount.setText(viewCount > 10000 ? getResources().getString(R.string.home_video_count, StringUtils.DecimalFormat(viewCount)) : String.valueOf(viewCount));
+            tvDanmakuCount.setText(danmakuCount > 10000 ? getResources().getString(R.string.home_video_count, StringUtils.DecimalFormat(danmakuCount)) : String.valueOf(danmakuCount));
+            tvShare.setText(shareCount > 10000 ? getResources().getString(R.string.home_video_count, StringUtils.DecimalFormat(shareCount)) : String.valueOf(shareCount));
+            tvCoin.setText(coinCount > 10000 ? getResources().getString(R.string.home_video_count, StringUtils.DecimalFormat(coinCount)) : String.valueOf(coinCount));
+            tvCollect.setText(favoriteCount > 10000 ? getResources().getString(R.string.home_video_count, StringUtils.DecimalFormat(favoriteCount)) : String.valueOf(favoriteCount));
         }
         if (authorInfo != null) {
             Glide.with(getActivity()).load(authorInfo.getCard().getFace()).transform(new GlideCircleTransform(getActivity())).into(ivAvatar);
             tvAuthor.setText(authorInfo.getCard().getName());
-            tvUpTime.setText(getResources().getString(R.string.video_detail_up_time, data.getCreate_time()));
+            tvUpTime.setText(getResources().getString(R.string.video_detail_up_time, TimeUtils.formatStringTime(data.getCreate_time())));
         }
 
         TagAdapter<String> adapter = new TagAdapter<String>(data.getTag_list()) {
@@ -85,7 +100,17 @@ public class VideoDescriptionFragment extends BaseFragment {
         };
 
         flowLayout.setAdapter(adapter);
+
+        initRecyclerView(data.getRelative_list());
     }
+
+    private void initRecyclerView(List<VideoItem> videoItemList) {
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(manager);
+
+
+    }
+
 
     @OnClick({R.id.tv_share, R.id.tv_coin, R.id.tv_collect, R.id.tv_download})
     public void onViewClicked(View view) {

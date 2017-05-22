@@ -92,30 +92,26 @@ public class ApiManager {
     }
 
     // 云端响应头拦截器，用来配置缓存策略
-    private Interceptor mRewriteCacheControlInterceptor = new Interceptor() {
-
-        @Override
-        public Response intercept(Chain chain) throws IOException {
-            Request request = chain.request();
-            Context context = BLApplication.getInstance();
-            if (!CommonUtil.isNet(context)) {
-                request = request.newBuilder()
-                        .cacheControl(CacheControl.FORCE_CACHE)
-                        .build();
-            }
-            Response originalResponse = chain.proceed(request);
-            if (CommonUtil.isNet(context)) {
-                //有网的时候读接口上的@Headers里的配置，可以在这里进行统一的设置
-                return originalResponse.newBuilder()
-                        .header("Cache-Control", "public, max-age=" + Constants.HTTP_CACHE_STALE_SHORT)
-                        .removeHeader("Pragma")
-                        .build();
-            } else {
-                return originalResponse.newBuilder()
-                        .header("Cache-Control", "public, only-if-cached, max-stale=" + Constants.HTTP_CACHE_STALE_LONG)
-                        .removeHeader("Pragma")
-                        .build();
-            }
+    private Interceptor mRewriteCacheControlInterceptor = (chain) -> {
+        Request request = chain.request();
+        Context context = BLApplication.getInstance();
+        if (!CommonUtil.isNet(context)) {
+            request = request.newBuilder()
+                    .cacheControl(CacheControl.FORCE_CACHE)
+                    .build();
+        }
+        Response originalResponse = chain.proceed(request);
+        if (CommonUtil.isNet(context)) {
+            //有网的时候读接口上的@Headers里的配置，可以在这里进行统一的设置
+            return originalResponse.newBuilder()
+                    .header("Cache-Control", "public, max-age=" + Constants.HTTP_CACHE_STALE_SHORT)
+                    .removeHeader("Pragma")
+                    .build();
+        } else {
+            return originalResponse.newBuilder()
+                    .header("Cache-Control", "public, only-if-cached, max-stale=" + Constants.HTTP_CACHE_STALE_LONG)
+                    .removeHeader("Pragma")
+                    .build();
         }
     };
 
@@ -159,7 +155,7 @@ public class ApiManager {
         public List<Cookie> loadForRequest(HttpUrl url) {
             //可以从本地读取cookies发送
             List<Cookie> cookies = cookieStore.get(url.host());
-            cookies = cookies != null ? cookies : new ArrayList<Cookie>();
+            cookies = cookies != null ? cookies : new ArrayList<>();
             return cookies;
         }
     }

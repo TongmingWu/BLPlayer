@@ -12,7 +12,7 @@ public class Constants {
     /**
      * http短缓存时间
      */
-    public static final int HTTP_CACHE_STALE_SHORT = 10;
+    public static final int HTTP_CACHE_STALE_SHORT = 5;
 
     /**
      * http长缓存时间

@@ -12,5 +12,9 @@ public class PrefixUrl {
      */
     public static final String BASE_URL = "http://192.168.1.202:5000";
 
+    /**
+     * 弹幕文件地址 ==> cid
+     */
+    public static final String DANMAKU_URL = "http://comment.bilibili.com/%s.xml";
 
 }

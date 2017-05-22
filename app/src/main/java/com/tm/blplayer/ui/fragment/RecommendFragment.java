@@ -48,7 +48,7 @@ public class RecommendFragment extends BaseFragment implements BaseView {
 
     private List<VideoItem> mData = new ArrayList<>();
 
-//    private RecommendPresenter mRecommendPresenter;
+    //    private RecommendPresenter mRecommendPresenter;
     private VideoCardAdapter mAdapter;
 
     @Override
@@ -74,12 +74,7 @@ public class RecommendFragment extends BaseFragment implements BaseView {
      * 初始化刷新控件
      */
     private void initRefreshLayout() {
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getData();
-            }
-        });
+        mSwipeRefreshLayout.setOnRefreshListener(this::getData);
     }
 
     /**
@@ -98,13 +93,12 @@ public class RecommendFragment extends BaseFragment implements BaseView {
     private void initRecyclerView() {
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
         mAdapter = new VideoCardAdapter(getActivity(), mData);
-        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new OnItemClickListener<VideoItem>() {
             @Override
-            public void onItemClick(Object object, int position) {
-                VideoItem item = (VideoItem) object;
-                if (item != null) {
+            public void onItemClick(View view, VideoItem data, int position) {
+                if (data != null) {
                     Intent intent = new Intent(getActivity(), VideoDetailActivity.class);
-                    intent.putExtra(Constants.VIDEO_AID, item.getAid());
+                    intent.putExtra(Constants.VIDEO_AID, data.getAid());
                     startActivity(intent);
                 }
             }
@@ -119,12 +113,7 @@ public class RecommendFragment extends BaseFragment implements BaseView {
      * 刷新控件开关
      */
     private void toggleRefresh(final boolean refresh) {
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(refresh);
-            }
-        });
+        new Handler().post(() -> mSwipeRefreshLayout.setRefreshing(refresh));
     }
 
     /**
@@ -151,11 +140,8 @@ public class RecommendFragment extends BaseFragment implements BaseView {
         HomeData data = (HomeData) result;
         if (data != null && data.getVideo_list().size() > 0) {
             mBannerLayout.setViewUrls(filterBannerUrls(data.getBanner()));
-            mBannerLayout.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
-                @Override
-                public void onItemClick(int position) {
-                    // TODO: 2017/5/17 banner点击跳转
-                }
+            mBannerLayout.setOnBannerItemClickListener(position -> {
+                // TODO: 2017/5/17 banner点击跳转
             });
             mData.clear();
             mData.addAll(data.getVideo_list());

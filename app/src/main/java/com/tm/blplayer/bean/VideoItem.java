@@ -377,14 +377,14 @@ public class VideoItem implements Parcelable {
          */
 
         private String aid;
-        private String coin;
-        private String danmaku;
-        private String favorite;
+        private int coin;
+        private int danmaku;
+        private int favorite;
         private int his_rank;
         private int now_rank;
-        private String reply;
-        private String share;
-        private String view;
+        private int reply;
+        private int share;
+        private int view;
 
         public String getAid() {
             return aid;
@@ -394,27 +394,27 @@ public class VideoItem implements Parcelable {
             this.aid = aid;
         }
 
-        public String getCoin() {
+        public int getCoin() {
             return coin;
         }
 
-        public void setCoin(String coin) {
+        public void setCoin(int coin) {
             this.coin = coin;
         }
 
-        public String getDanmaku() {
+        public int getDanmaku() {
             return danmaku;
         }
 
-        public void setDanmaku(String danmaku) {
+        public void setDanmaku(int danmaku) {
             this.danmaku = danmaku;
         }
 
-        public String getFavorite() {
+        public int getFavorite() {
             return favorite;
         }
 
-        public void setFavorite(String favorite) {
+        public void setFavorite(int favorite) {
             this.favorite = favorite;
         }
 
@@ -434,27 +434,27 @@ public class VideoItem implements Parcelable {
             this.now_rank = now_rank;
         }
 
-        public String getReply() {
+        public int getReply() {
             return reply;
         }
 
-        public void setReply(String reply) {
+        public void setReply(int reply) {
             this.reply = reply;
         }
 
-        public String getShare() {
+        public int getShare() {
             return share;
         }
 
-        public void setShare(String share) {
+        public void setShare(int share) {
             this.share = share;
         }
 
-        public String getView() {
+        public int getView() {
             return view;
         }
 
-        public void setView(String view) {
+        public void setView(int view) {
             this.view = view;
         }
 
@@ -466,14 +466,14 @@ public class VideoItem implements Parcelable {
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(this.aid);
-            dest.writeString(this.coin);
-            dest.writeString(this.danmaku);
-            dest.writeString(this.favorite);
+            dest.writeInt(this.coin);
+            dest.writeInt(this.danmaku);
+            dest.writeInt(this.favorite);
             dest.writeInt(this.his_rank);
             dest.writeInt(this.now_rank);
-            dest.writeString(this.reply);
-            dest.writeString(this.share);
-            dest.writeString(this.view);
+            dest.writeInt(this.reply);
+            dest.writeInt(this.share);
+            dest.writeInt(this.view);
         }
 
         public StatBean() {
@@ -481,14 +481,14 @@ public class VideoItem implements Parcelable {
 
         protected StatBean(Parcel in) {
             this.aid = in.readString();
-            this.coin = in.readString();
-            this.danmaku = in.readString();
-            this.favorite = in.readString();
+            this.coin = in.readInt();
+            this.danmaku = in.readInt();
+            this.favorite = in.readInt();
             this.his_rank = in.readInt();
             this.now_rank = in.readInt();
-            this.reply = in.readString();
-            this.share = in.readString();
-            this.view = in.readString();
+            this.reply = in.readInt();
+            this.share = in.readInt();
+            this.view = in.readInt();
         }
 
         public static final Creator<StatBean> CREATOR = new Creator<StatBean>() {

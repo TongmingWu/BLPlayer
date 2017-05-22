@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -40,6 +41,8 @@ import butterknife.OnClick;
  */
 
 public class VideoDetailActivity extends BaseActivity implements BaseView {
+    @BindView(R.id.cl_root)
+    CoordinatorLayout clRoot;
     @BindView(R.id.ll_back)
     LinearLayout llBack;
     @BindView(R.id.ll_play)
@@ -77,29 +80,27 @@ public class VideoDetailActivity extends BaseActivity implements BaseView {
         tvBackTitle.setText(getResources().getString(R.string.video_detail_av, String.valueOf(aid)));
         toolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
         fabSize = CommonUtil.dip2px(this, 60f);
-        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                float totalScrollRange = mAppBarLayout.getTotalScrollRange();
-                float offset = Math.abs(verticalOffset);
-                float scale = 1 - offset / totalScrollRange;
-                ViewGroup.LayoutParams params = fabPlay.getLayoutParams();
-                params.width = (int) (fabSize * scale);
-                params.height = (int) (fabSize * scale);
-                fabPlay.setLayoutParams(params);
-                if (offset >= totalScrollRange) {
-                    toolbar.setBackgroundColor(getResources().getColor(R.color.dominantColor));
-                    tvBackTitle.setVisibility(View.GONE);
-                    llPlay.setVisibility(View.VISIBLE);
-                    fabPlay.setVisibility(View.GONE);
-                } else {
-                    toolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
-                    tvBackTitle.setVisibility(View.VISIBLE);
-                    llPlay.setVisibility(View.GONE);
-                    fabPlay.setVisibility(View.VISIBLE);
-                }
+        mAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            float totalScrollRange = mAppBarLayout.getTotalScrollRange();
+            float offset = Math.abs(verticalOffset);
+            float scale = 1 - offset / totalScrollRange;
+            ViewGroup.LayoutParams params = fabPlay.getLayoutParams();
+            params.width = (int) (fabSize * scale);
+            params.height = (int) (fabSize * scale);
+            fabPlay.setLayoutParams(params);
+            if (offset >= totalScrollRange) {
+                toolbar.setBackgroundColor(getResources().getColor(R.color.dominantColor));
+                tvBackTitle.setVisibility(View.GONE);
+                llPlay.setVisibility(View.VISIBLE);
+                fabPlay.setVisibility(View.GONE);
+            } else {
+                toolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
+                tvBackTitle.setVisibility(View.VISIBLE);
+                llPlay.setVisibility(View.GONE);
+                fabPlay.setVisibility(View.VISIBLE);
             }
         });
+
     }
 
     @Override
