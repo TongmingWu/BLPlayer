@@ -11,6 +11,9 @@
     <string name="video_detail_play_now">立即播放</string>
     <string name="video_detail_download">缓存</string>
     <string name="video_detail_attention">关注</string>
+    <string name="video_detail_up_time">%s前投递</string>
+    <string name="video_detail_flag">视频相关标签</string>
+    <string name="video_detail_relative_video">相关视频</string>
     <array name="video_detail_tab">
         <item>简介</item>
         <item>评论(%s)</item>

@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/libraries" />
             <option value="$PROJECT_DIR$/libraries/BannerLayout" />
+            <option value="$PROJECT_DIR$/libraries/TagFlowLayout" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -26,6 +26,11 @@
         <activity
             android:name=".ui.activity.VideoDetailActivity"
             android:screenOrientation="portrait" />
+
+        <!--Glide缓存设置-->
+        <meta-data
+            android:name="com.tm.blplayer.widget.GlideCacheModule"
+            android:value="GlideModule" />
     </application>
 
 </manifest>

@@ -48,7 +48,7 @@ public class RecommendFragment extends BaseFragment implements BaseView {
 
     private List<VideoItem> mData = new ArrayList<>();
 
-    private RecommendPresenter mRecommendPresenter;
+//    private RecommendPresenter mRecommendPresenter;
     private VideoCardAdapter mAdapter;
 
     @Override
@@ -131,10 +131,10 @@ public class RecommendFragment extends BaseFragment implements BaseView {
      * 创建presenter
      */
     private void createPresenter() {
-        if (mRecommendPresenter == null) {
-            mRecommendPresenter = new RecommendPresenter();
+        if (presenter == null) {
+            presenter = new RecommendPresenter();
         }
-        mRecommendPresenter.onAttach(this);
+        presenter.onAttach(this);
     }
 
     /**
@@ -142,7 +142,7 @@ public class RecommendFragment extends BaseFragment implements BaseView {
      */
     private void getData() {
         toggleRefresh(true);
-        mRecommendPresenter.requestData(null);
+        presenter.requestData(null);
     }
 
     @Override
@@ -161,7 +161,7 @@ public class RecommendFragment extends BaseFragment implements BaseView {
             mData.addAll(data.getVideo_list());
             mAdapter.notifyDataSetChanged();
         } else {
-            //空处理
+            //空处理,展示空布局
             Logger.e("获取不到数据");
         }
     }
@@ -187,13 +187,5 @@ public class RecommendFragment extends BaseFragment implements BaseView {
     public void onNetworkError(String error) {
         toggleRefresh(false);
         ToastUtils.showShortToast(getActivity(), error);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (mRecommendPresenter != null) {
-            mRecommendPresenter.onDetach();
-        }
     }
 }

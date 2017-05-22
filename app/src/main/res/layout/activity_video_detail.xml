@@ -15,6 +15,7 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="20dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
@@ -29,8 +30,8 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="scrollable"
             app:tabIndicatorColor="@color/white"
+            app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/white"
             app:tabTextColor="@color/tabNormalColor" />
 
@@ -47,10 +48,10 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginRight="10dp"
-        app:layout_scrollFlags="scroll|enterAlways"
         app:fabSize="normal"
         app:layout_anchor="@id/tab_layout"
         app:layout_anchorGravity="right"
+        app:layout_scrollFlags="scroll|enterAlways"
         app:srcCompat="@drawable/ic_video_play" />
 
 </android.support.design.widget.CoordinatorLayout>

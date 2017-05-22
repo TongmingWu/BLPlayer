@@ -22,6 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Author: Tongming
@@ -72,7 +73,7 @@ public class VideoCardAdapter extends RecyclerView.Adapter<VideoCardAdapter.Vide
         VideoItem videoItem = mData.get(position);
         holder.itemView.setTag(R.id.ll_video_card, videoItem);
         holder.itemView.setTag(R.id.card_view, position);
-        String play = videoItem.getPlay();
+        String play = videoItem.getStat().getView();
         try {
             int temp = Integer.parseInt(play);
             if (temp > 10000.0f) {         //如果大于一万的话则以0.0的计数方式
@@ -82,7 +83,7 @@ public class VideoCardAdapter extends RecyclerView.Adapter<VideoCardAdapter.Vide
             //出现问题的值为 "--"
             Logger.e("数字转换异常,当前play = " + play);
         }
-        String review = videoItem.getVideo_review();
+        String review = videoItem.getStat().getDanmaku();
         try {
             int temp = Integer.parseInt(review);
             if (temp > 10000.0f) {         //如果大于一万的话则以0.0的计数方式
@@ -101,8 +102,9 @@ public class VideoCardAdapter extends RecyclerView.Adapter<VideoCardAdapter.Vide
 
         holder.tvPlayCount.setText(play);
         holder.tvDanmakuCount.setText(String.valueOf(review));
-        holder.tvDuration.setText(videoItem.getDuration());
+        holder.tvDuration.setText(StringUtils.formatTime(videoItem.getDuration()));
         holder.tvTitle.setText(videoItem.getTitle());
+        holder.tvType.setText(videoItem.getTname());
     }
 
     @Override
@@ -135,11 +137,24 @@ public class VideoCardAdapter extends RecyclerView.Adapter<VideoCardAdapter.Vide
         TextView tvDuration;
         @BindView(R.id.tv_title)
         TextView tvTitle;
+        @BindView(R.id.tv_type_name)
+        TextView tvType;
+        @BindView(R.id.iv_card_more)
+        ImageView ivMore;
 
         public VideoCardViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
             ButterKnife.bind(this, itemView);
+        }
+
+        @OnClick({R.id.iv_card_more})
+        public void onViewClicked(View view) {
+            switch (view.getId()) {
+                case R.id.iv_card_more:
+                    Logger.d("点击更多");
+                    break;
+            }
         }
     }
 }

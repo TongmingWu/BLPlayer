@@ -10,11 +10,12 @@
     <color name="dominantFontColor">#a6a6a6</color>
     <color name="dominantFontPinkColor">#ff84a7</color>
     <color name="secondaryFontColor01">#515151</color>
+    <color name="secondaryFontColor02">#6f6f6f</color>
     
     <color name="tabNormalColor">@color/dominantFontColor</color>
 
     <color name="alphaBlack">#33000000</color>
-    <color name="divideColor">#d4d4d4</color>
+    <color name="divideColor">#444444</color>
 
     <!--视频详情页四个图标的字体颜色-->
     <color name="shareFontColor">#46c235</color>

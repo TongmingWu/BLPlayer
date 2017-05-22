@@ -23,7 +23,7 @@ public abstract class BaseFragment extends RxFragment {
 
     private View mRootView;
     private Unbinder bind;
-    private BasePresenter<BaseView> presenter;
+    protected BasePresenter<BaseView> presenter;
 
     @Nullable
     @Override
