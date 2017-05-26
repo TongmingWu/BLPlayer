@@ -92,7 +92,7 @@ public class RecommendFragment extends BaseFragment implements BaseView {
      */
     private void initRecyclerView() {
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
-        mAdapter = new VideoCardAdapter(getActivity(), mData);
+        mAdapter = new VideoCardAdapter(getActivity(), mData, true);
         mAdapter.setOnItemClickListener(new OnItemClickListener<VideoItem>() {
             @Override
             public void onItemClick(View view, VideoItem data, int position) {

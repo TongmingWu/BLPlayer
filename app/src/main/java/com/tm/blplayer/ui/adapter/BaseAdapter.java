@@ -51,7 +51,8 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflate = View.inflate(mContext, getLayoutId(), null);
         inflate.setOnClickListener(this);
-        BaseViewHolder holder = new BaseViewHolder(inflate);
+        BaseViewHolder holder = new BaseViewHolder(inflate, mContext);
+        afterCreatedHolder(holder);
         return holder;
     }
 
@@ -60,6 +61,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
         T item = mData.get(position);
         holder.itemView.setTag(R.id.tag_data, item);
         holder.itemView.setTag(R.id.tag_position, position);
+        bind(holder, item, position);
     }
 
     @Override
@@ -70,11 +72,15 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mData != null ? mData.size() : 0;
     }
+
+    protected abstract void bind(BaseViewHolder holder, T item, int position);
 
     @LayoutRes
     protected abstract int getLayoutId();
+
+    protected abstract void afterCreatedHolder(BaseViewHolder holder);
 
     @Override
     public void onClick(View v) {

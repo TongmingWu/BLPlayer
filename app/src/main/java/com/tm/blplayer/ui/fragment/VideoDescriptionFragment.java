@@ -1,5 +1,6 @@
 package com.tm.blplayer.ui.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,8 +11,12 @@ import com.bumptech.glide.Glide;
 import com.tm.blplayer.R;
 import com.tm.blplayer.bean.VideoDetailData;
 import com.tm.blplayer.bean.VideoItem;
+import com.tm.blplayer.listener.OnItemClickListener;
+import com.tm.blplayer.ui.activity.VideoDetailActivity;
+import com.tm.blplayer.ui.adapter.VideoCardAdapter;
 import com.tm.blplayer.utils.StringUtils;
 import com.tm.blplayer.utils.TimeUtils;
+import com.tm.blplayer.utils.constants.Constants;
 import com.tm.blplayer.widget.GlideCircleTransform;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
@@ -107,8 +112,19 @@ public class VideoDescriptionFragment extends BaseFragment {
     private void initRecyclerView(List<VideoItem> videoItemList) {
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(manager);
-
-
+        VideoCardAdapter adapter = new VideoCardAdapter(getActivity(), videoItemList, false);
+        adapter.setOnItemClickListener(new OnItemClickListener<VideoItem>() {
+            @Override
+            public void onItemClick(View view, VideoItem data, int position) {
+                if (data != null) {
+                    Intent intent = new Intent(getActivity(), VideoDetailActivity.class);
+                    intent.putExtra(Constants.VIDEO_AID, data.getAid());
+                    startActivity(intent);
+                }
+            }
+        });
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setNestedScrollingEnabled(false);
     }
 
 
