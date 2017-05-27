@@ -19,26 +19,13 @@ public class GlideUtils {
      */
     public static void loadNetImage(Context context, String url, ImageView view) {
         Glide.with(context)
-                .load(filterUrl(url))
+                .load(StringUtils.filterUrl(url))
                 .placeholder(R.drawable.ic_default_image)
                 .centerCrop()
                 .dontAnimate()
                 .into(view);
     }
 
-    /**
-     * 清洗url
-     */
-    private static String filterUrl(String url) {
-        String result = "";
-        if (!StringUtils.isTrimEmpty(url)) {
-            if (url.startsWith("http")) {
-                result = url;
-            } else if (url.startsWith("//")) {
-                result = "http:" + url;
-            }
-        }
-        return result;
-    }
+
 
 }

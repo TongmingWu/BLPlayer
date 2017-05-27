@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/windowBackground"
+    android:fitsSystemWindows="true"
+    app:layout_collapseMode="parallax"
+    app:layout_collapseParallaxMultiplier="0.5">
 
-    <ImageView
-        android:id="@+id/iv_cover"
+    <com.tm.blplayer.widget.media.IjkVideoView
+        android:id="@+id/video_view"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        app:layout_collapseMode="parallax"
-        app:layout_collapseParallaxMultiplier="0.5"
+        android:layout_height="180dp"
         android:background="@color/windowBackground" />
 
-</LinearLayout>
+    <master.flame.danmaku.ui.widget.DanmakuView
+        android:id="@+id/danmaku_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</FrameLayout>

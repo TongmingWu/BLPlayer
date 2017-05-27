@@ -21,6 +21,7 @@ import com.tm.blplayer.mvp.view.BaseView;
 import com.tm.blplayer.ui.activity.VideoDetailActivity;
 import com.tm.blplayer.ui.adapter.VideoCardAdapter;
 import com.tm.blplayer.utils.CommonUtil;
+import com.tm.blplayer.utils.StringUtils;
 import com.tm.blplayer.utils.ToastUtils;
 import com.tm.blplayer.utils.constants.Constants;
 import com.tm.blplayer.widget.GridSpacingItemDecoration;
@@ -158,7 +159,7 @@ public class RecommendFragment extends BaseFragment implements BaseView {
     private List<String> filterBannerUrls(List<BannerItem> bannerItemList) {
         List<String> result = new ArrayList<>();
         for (BannerItem item : bannerItemList) {
-            result.add(item.getPic());
+            result.add(StringUtils.filterUrl(item.getPic()));
         }
         return result;
     }

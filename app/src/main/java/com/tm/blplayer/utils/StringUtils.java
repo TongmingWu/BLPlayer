@@ -70,4 +70,19 @@ public class StringUtils {
         }
         return result;
     }
+
+    /**
+     * 清洗url
+     */
+    public static String filterUrl(String url) {
+        String result = "";
+        if (!StringUtils.isTrimEmpty(url)) {
+            if (url.startsWith("http")) {
+                result = url;
+            } else if (url.startsWith("//")) {
+                result = "http:" + url;
+            }
+        }
+        return result;
+    }
 }
