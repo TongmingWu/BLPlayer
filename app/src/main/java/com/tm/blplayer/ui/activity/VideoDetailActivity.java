@@ -2,6 +2,7 @@ package com.tm.blplayer.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -39,6 +40,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
+
+import static android.os.Process.THREAD_PRIORITY_AUDIO;
+import static android.os.Process.THREAD_PRIORITY_BACKGROUND;
 
 /**
  * @author wutongming
@@ -187,9 +191,10 @@ public class VideoDetailActivity extends BaseActivity implements BaseView {
      * 播放视频
      */
     private void playVideo() {
-        if (!StringUtils.isTrimEmpty(playUrl)) {
-            videoView.start();
+        if (!StringUtils.isTrimEmpty(playUrl) && !videoView.isPlaying()) {
+            Logger.d("playUrl = " + playUrl);
             hidePlayFab();
+            videoView.start();
         }
     }
 
@@ -223,7 +228,9 @@ public class VideoDetailActivity extends BaseActivity implements BaseView {
             //播放失败时重试下一个链接,知道没有链接为止
             //失败的原因有403
             if (mCurrentUrlIndex < mData.getVideo_info().getUrl_list().size()) {
-                videoView.setVideoPath(mData.getVideo_info().getUrl_list().get(mCurrentUrlIndex++));
+                playUrl = mData.getVideo_info().getUrl_list().get(mCurrentUrlIndex++);
+                videoView.setVideoPath(playUrl);
+                Logger.d("next url = " + playUrl);
             } else {
                 ToastUtils.showShortToast(VideoDetailActivity.this, getString(R.string.video_detail_parse_failed));
             }
@@ -231,6 +238,7 @@ public class VideoDetailActivity extends BaseActivity implements BaseView {
         });
 
         videoView.setMediaController(null);
+
     }
 
     @Override
