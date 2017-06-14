@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 25
@@ -27,8 +28,8 @@ android {
         exclude 'META-INF/rxjava.properties'
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -36,9 +37,6 @@ buildscript {
     repositories {
         mavenCentral()
         jcenter()
-    }
-    dependencies {
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
     }
 }
 
@@ -75,11 +73,6 @@ dependencies {
     compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.0.1'
     compile 'com.trello:rxlifecycle-components:1.0'
 
-    //ButterKnife
-    compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-//    apply plugin: 'android-apt'
-
     //RxPermissions
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.3@aar'
 
@@ -105,6 +98,7 @@ dependencies {
 
     //logger
     compile 'com.orhanobut:logger:1.15'
+
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 repositories {

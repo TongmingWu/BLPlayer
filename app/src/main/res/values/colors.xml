@@ -11,7 +11,7 @@
     <color name="dominantFontPinkColor">#ff84a7</color>
     <color name="secondaryFontColor01">#515151</color>
     <color name="secondaryFontColor02">#6f6f6f</color>
-    
+
     <color name="tabNormalColor">@color/dominantFontColor</color>
 
     <color name="alphaBlack">#33000000</color>
@@ -22,6 +22,14 @@
     <color name="coinFontColor">#ffa726</color>
     <color name="collectFontColor">#ff84a7</color>
     <color name="downloadFontColor">#3ca6ff</color>
+
+    <!--播放控制条背景颜色-->
+    <color name="controlBgColor">#3000</color>
+
+    <!--一级进度条背景颜色-->
+    <color name="firstProgressColor">@color/black</color>
+    <!--二级进度条颜色-->
+    <color name="secondaryProgressColor">@color/windowBackground</color>
 
     <color name="transparent">#0000</color>
     <color name="black">#000000</color>

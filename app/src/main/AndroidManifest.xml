@@ -9,11 +9,11 @@
     <application
         android:name="BLApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activity.HomeActivity"
@@ -24,10 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.activity.VideoDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/TranslucentTheme" />
+            android:screenOrientation="portrait" />
 
         <!--Glide缓存设置-->
         <meta-data
