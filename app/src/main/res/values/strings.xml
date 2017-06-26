@@ -5,6 +5,8 @@
     <string name="home_no_login">未登录</string>
     <string name="home_exit_hint">再按一次退出</string>
     <string name="home_video_count">%sw</string>
+    <string name="home_bangumi_time_line">时间表</string>
+    <string name="home_bangumi_index">索引</string>
 
     <!--VideoDetailActivity-->
     <string name="video_detail_av">av%s</string>

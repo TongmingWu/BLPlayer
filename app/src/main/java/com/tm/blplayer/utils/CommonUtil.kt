@@ -71,12 +71,7 @@ class CommonUtil {
                     Context.ACTIVITY_SERVICE) as ActivityManager
             val runningService = myManager
                     .getRunningServices(30) as ArrayList<ActivityManager.RunningServiceInfo>
-            for (info in runningService) {
-                if (info.service.className == className) {
-                    return true
-                }
-            }
-            return false
+            return runningService.any { it.service.className == className }
         }
 
         //跳转至拨号界面

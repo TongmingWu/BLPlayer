@@ -1,6 +1,7 @@
 package com.tm.blplayer.ui.fragment
 
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,9 +24,7 @@ abstract class BaseFragment : RxFragment(), View.OnClickListener {
     protected var presenter: BasePresenter<BaseView>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (mRootView == null) {
-            mRootView = inflater.inflate(layoutId, null)
-        }
+        mRootView = mRootView ?: inflater.inflate(layoutId, null)
         return mRootView
     }
 
@@ -37,6 +36,7 @@ abstract class BaseFragment : RxFragment(), View.OnClickListener {
     /**
      * LayoutId
      */
+    @get:LayoutRes
     protected abstract val layoutId: Int
 
     /**
