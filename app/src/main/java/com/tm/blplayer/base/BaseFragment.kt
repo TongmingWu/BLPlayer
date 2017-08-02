@@ -1,4 +1,4 @@
-package com.tm.blplayer.ui.fragment
+package com.tm.blplayer.base
 
 import android.os.Bundle
 import android.support.annotation.LayoutRes
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.tm.blplayer.mvp.presenter.BasePresenter
 import com.tm.blplayer.mvp.view.BaseView
 import com.trello.rxlifecycle.components.support.RxFragment
+import rx.Subscription
 
 /**
  * @author wutongming
@@ -22,6 +23,7 @@ abstract class BaseFragment : RxFragment(), View.OnClickListener {
 
     private var mRootView: View? = null
     protected var presenter: BasePresenter<BaseView>? = null
+    protected var subscriptionList: MutableCollection<Subscription>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mRootView = mRootView ?: inflater.inflate(layoutId, null)
@@ -44,8 +46,30 @@ abstract class BaseFragment : RxFragment(), View.OnClickListener {
      */
     protected abstract fun initView()
 
+    /**
+     * 添加订阅事件
+     */
+    protected fun addToSubscriptions(subscription: Subscription) {
+        subscriptionList ?: ArrayList()
+        subscriptionList?.let {
+            subscriptionList?.add(subscription)
+        }
+    }
+
+    /**
+     * 移除订阅事件
+     */
+    protected fun removeSubscriptions() {
+        subscriptionList?.filterNot {
+            it.isUnsubscribed
+        }?.forEach {
+            it.unsubscribe()
+        }
+    }
+
     override fun onDestroyView() {
-        presenter?.onDetach()
         super.onDestroyView()
+        presenter?.onDetach()
+        removeSubscriptions()
     }
 }

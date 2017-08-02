@@ -1,4 +1,4 @@
-package com.tm.blplayer.ui.adapter
+package com.tm.blplayer.base
 
 import android.content.Context
 import android.support.annotation.LayoutRes
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.tm.blplayer.R
 import com.tm.blplayer.listener.OnItemClickListener
-import com.tm.blplayer.ui.holder.BaseViewHolder
 import java.util.*
 
 /**

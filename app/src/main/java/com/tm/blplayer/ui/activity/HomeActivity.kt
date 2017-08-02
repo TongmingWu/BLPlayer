@@ -12,6 +12,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import com.tm.blplayer.R
+import com.tm.blplayer.base.BaseActivity
 import com.tm.blplayer.ui.fragment.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.include_common_toolbar.*
@@ -58,6 +59,10 @@ class HomeActivity : BaseActivity() {
 
         view_pager.currentItem = 1
         tab_layout.setupWithViewPager(view_pager)
+    }
+
+    override fun initData() {
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

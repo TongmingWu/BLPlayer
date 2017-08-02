@@ -12,7 +12,7 @@ object PrefixUrl {
     /**
      * 测试地址
      */
-    val BASE_URL = "http://192.168.1.153:5000"
+    val BASE_URL = "http://192.168.84.45:5000"
 
     /**
      * 弹幕文件地址 ==> cid

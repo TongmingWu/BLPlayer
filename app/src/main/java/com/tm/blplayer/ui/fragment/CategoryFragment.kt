@@ -2,6 +2,7 @@ package com.tm.blplayer.ui.fragment
 
 import android.view.View
 import com.tm.blplayer.R
+import com.tm.blplayer.base.BaseFragment
 
 /**
  * @author wutongming

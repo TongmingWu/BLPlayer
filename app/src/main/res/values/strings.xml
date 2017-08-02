@@ -17,10 +17,10 @@
     <string name="video_detail_flag">视频相关标签</string>
     <string name="video_detail_relative_video">相关视频</string>
     <string name="video_detail_parse_failed">哎呀~视频解析失败了</string>
-    <array name="video_detail_tab">
-        <item>简介</item>
-        <item>评论(%s)</item>
-    </array>
+
+    <!--WebViewActivity-->
+    <string name="web_view_loading">加载中…</string>
+    <string name="web_view_load_error">网页加载失败啦~</string>
 
     <!--播放器组件-->
     <string name="N_A">N/A</string>

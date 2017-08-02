@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="video_detail_tab">
+        <item>简介</item>
+        <item>评论(%s)</item>
+    </array>
+</resources>

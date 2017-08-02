@@ -1,8 +1,10 @@
 package com.tm.blplayer.observer
 
+import android.support.annotation.NonNull
 import com.orhanobut.logger.Logger
 import com.tm.blplayer.bean.BaseBean
 import com.tm.blplayer.listener.OnNetworkCallBackListener
+import com.tm.blplayer.utils.constants.Constants
 
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -15,7 +17,7 @@ import io.reactivex.disposables.Disposable
  * @since 2017/5/17
  */
 
-class NetworkObserver(private val mOnNetworkCallBackListener: OnNetworkCallBackListener) : Observer<BaseBean<*>> {
+class NetworkObserver(@NonNull private val mOnNetworkCallBackListener: OnNetworkCallBackListener) : Observer<BaseBean<*>> {
     var disposable: Disposable? = null
 
     override fun onSubscribe(d: Disposable) {
@@ -27,7 +29,8 @@ class NetworkObserver(private val mOnNetworkCallBackListener: OnNetworkCallBackL
         Logger.d("onNext")
         if (baseBean != null) {
             val code = baseBean.code
-            if (code == 200) {
+            if (code == Constants.REQUEST_SUCCEED) {
+
                 mOnNetworkCallBackListener.onNetworkRequestSuccess(baseBean)
             } else {
                 mOnNetworkCallBackListener.onNetworkRequestFailed(code, baseBean.message)

@@ -6,10 +6,11 @@ import android.view.View
 import com.jakewharton.rxbinding.view.RxView
 import com.orhanobut.logger.Logger
 import com.tm.blplayer.R
+import com.tm.blplayer.base.BaseActivity
+import com.tm.blplayer.base.BaseFragment
 import com.tm.blplayer.bean.VideoDetailData
 import com.tm.blplayer.mvp.presenter.VideoDetailPresenter
 import com.tm.blplayer.mvp.view.BaseView
-import com.tm.blplayer.ui.fragment.BaseFragment
 import com.tm.blplayer.ui.fragment.VideoCommentFragment
 import com.tm.blplayer.ui.fragment.VideoDescriptionFragment
 import com.tm.blplayer.utils.CommonUtil
@@ -112,6 +113,10 @@ class VideoDetailActivity : BaseActivity(), BaseView {
             }
         }
         tab_layout.setupWithViewPager(view_pager)
+    }
+
+    override fun initData() {
+
     }
 
     /**
@@ -236,6 +241,7 @@ class VideoDetailActivity : BaseActivity(), BaseView {
             video_view.stopPlayback()
             video_view.release(true)
             video_view.stopBackgroundPlay()
+            mBackPressed = false
         } else {
             video_view.enterBackground()
 
@@ -246,5 +252,9 @@ class VideoDetailActivity : BaseActivity(), BaseView {
     override fun onDestroy() {
         super.onDestroy()
         mVideoDetailPresenter?.onDetach()
+        video_view.stopPlayback()
+        video_view.release(true)
+        video_view.stopBackgroundPlay()
+        IjkMediaPlayer.native_profileEnd()
     }
 }
