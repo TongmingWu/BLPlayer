@@ -2,6 +2,7 @@ package com.tm.blplayer.ui.activity
 
 import android.os.Build
 import android.view.View
+import com.orhanobut.logger.Logger
 import com.tencent.smtt.export.external.interfaces.WebResourceError
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest
 import com.tencent.smtt.sdk.WebChromeClient
@@ -46,7 +47,11 @@ class WebViewActivity : BaseActivity() {
         web_view.setWebChromeClient(object : WebChromeClient() {
             override fun onProgressChanged(view: WebView, newProgress: Int) {
                 super.onProgressChanged(view, newProgress)
-
+                pb_loading.progress = newProgress
+                if (newProgress >= 100) {
+                    pb_loading.visibility = View.GONE
+                }
+                Logger.d("progress = " + newProgress)
             }
 
             override fun onReceivedTitle(view: WebView, title: String) {

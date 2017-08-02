@@ -114,23 +114,24 @@ class RecommendFragment : BaseFragment(), BaseView {
 
     override fun onNetworkSuccess(result: Any) {
         toggleRefresh(false)
-        val data = result as HomeData
-        if (data.video_list.size > 0) {
-            banner.setViewUrls(filterBannerUrls(data.banner))
-            banner.setOnBannerItemClickListener { position ->
-                val url = data.banner[position].url
-                val intent = Intent(activity, WebViewActivity::class.java)
-                intent.putExtra("url", url)
-                startActivity(intent)
-            }
-            initBannerLayout()
+        if (result is HomeData) {
+            if (result.video_list.size > 0) {
+                banner.setViewUrls(filterBannerUrls(result.banner))
+                banner.setOnBannerItemClickListener { position ->
+                    val url = result.banner[position].url
+                    val intent = Intent(activity, WebViewActivity::class.java)
+                    intent.putExtra("url", url)
+                    startActivity(intent)
+                }
+                initBannerLayout()
 
-            mData.clear()
-            mData.addAll(data.video_list)
-            mAdapter?.notifyDataSetChanged()
-        } else {
-            //空处理,展示空布局
-            Logger.e("获取不到数据")
+                mData.clear()
+                mData.addAll(result.video_list)
+                mAdapter?.notifyDataSetChanged()
+            } else {
+                //空处理,展示空布局
+                Logger.e("获取不到数据")
+            }
         }
     }
 
