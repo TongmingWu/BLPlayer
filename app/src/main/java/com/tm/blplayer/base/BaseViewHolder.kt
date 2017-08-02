@@ -1,4 +1,4 @@
-package com.tm.blplayer.ui.holder
+package com.tm.blplayer.base
 
 import android.content.Context
 import android.graphics.Color

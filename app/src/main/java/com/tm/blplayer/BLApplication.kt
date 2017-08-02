@@ -2,6 +2,7 @@ package com.tm.blplayer
 
 import android.app.Application
 import android.content.Context
+import com.tencent.smtt.sdk.QbSdk
 
 /**
  * @author wutongming
@@ -18,6 +19,11 @@ class BLApplication : Application() {
         super.onCreate()
 
         instance = applicationContext
+        initSDK()
+    }
+
+    private fun initSDK() {
+        QbSdk.initX5Environment(instance, null)
     }
 
     companion object {

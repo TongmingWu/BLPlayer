@@ -3,6 +3,7 @@ package com.tm.blplayer.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,7 +48,7 @@ public class VideoItem implements Parcelable {
     private int tid;
     private String title;
     private String tname;
-    private List<String> tags;
+    private List<String> tags = new ArrayList<>();
 
     public String getAid() {
         return aid;

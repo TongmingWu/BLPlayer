@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.tm.blplayer.R
+import com.tm.blplayer.base.BaseFragment
 import com.tm.blplayer.bean.VideoDetailData
 import com.tm.blplayer.bean.VideoItem
 import com.tm.blplayer.listener.OnItemClickListener

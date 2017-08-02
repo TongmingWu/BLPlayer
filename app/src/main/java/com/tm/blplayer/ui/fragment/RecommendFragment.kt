@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.orhanobut.logger.Logger
 import com.tm.blplayer.R
+import com.tm.blplayer.base.BaseFragment
 import com.tm.blplayer.bean.BannerItem
 import com.tm.blplayer.bean.HomeData
 import com.tm.blplayer.bean.VideoItem
@@ -14,6 +15,7 @@ import com.tm.blplayer.listener.OnItemClickListener
 import com.tm.blplayer.mvp.presenter.RecommendPresenter
 import com.tm.blplayer.mvp.view.BaseView
 import com.tm.blplayer.ui.activity.VideoDetailActivity
+import com.tm.blplayer.ui.activity.WebViewActivity
 import com.tm.blplayer.ui.adapter.VideoCardAdapter
 import com.tm.blplayer.utils.CommonUtil
 import com.tm.blplayer.utils.StringUtils
@@ -116,7 +118,10 @@ class RecommendFragment : BaseFragment(), BaseView {
         if (data.video_list.size > 0) {
             banner.setViewUrls(filterBannerUrls(data.banner))
             banner.setOnBannerItemClickListener { position ->
-                // TODO: 2017/5/17 banner点击跳转
+                val url = data.banner[position].url
+                val intent = Intent(activity, WebViewActivity::class.java)
+                intent.putExtra("url", url)
+                startActivity(intent)
             }
             initBannerLayout()
 

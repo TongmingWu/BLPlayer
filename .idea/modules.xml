@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BLPlayer.iml" filepath="$PROJECT_DIR$/BLPlayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/BLPlayer.iml" filepath="$PROJECT_DIR$/.idea/BLPlayer.iml" />
+      <module fileurl="file://C:\Users\10695\StudioProjects\BLPlayer\BLPlayer.iml" filepath="C:\Users\10695\StudioProjects\BLPlayer\BLPlayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/BannerLayout/BannerLayout.iml" filepath="$PROJECT_DIR$/libraries/BannerLayout/BannerLayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/TagFlowLayout/TagFlowLayout.iml" filepath="$PROJECT_DIR$/libraries/TagFlowLayout/TagFlowLayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />

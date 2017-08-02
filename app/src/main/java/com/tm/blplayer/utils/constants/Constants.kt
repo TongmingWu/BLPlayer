@@ -40,4 +40,7 @@ object Constants {
      * 视频aid
      */
     val VIDEO_AID = "video_aid"
+
+    /**成功的请求码*/
+    val REQUEST_SUCCEED = 0
 }
