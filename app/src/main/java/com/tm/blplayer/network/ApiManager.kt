@@ -62,14 +62,19 @@ class ApiManager private constructor() {
     private class RewriteCacheControlInterceptor : Interceptor {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
-            var request = chain.request()
-            val context = BLApplication.instance
+            var requestOrigin  = chain.request()
+            val headersOrigin = requestOrigin.headers()
+            val headers = headersOrigin.newBuilder().set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36").build()
+            val request = requestOrigin.newBuilder().headers(headers).build()
             val originalResponse = chain.proceed(request)
+
+            val context = BLApplication.instance
+//            val originalResponse = chain.proceed(request)
             val build = originalResponse.newBuilder()
 
             context?.let {
                 if (!CommonUtil.isNet(context)) {
-                    request = request.newBuilder()
+                    requestOrigin = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_CACHE)
                             .build()
                 }

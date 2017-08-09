@@ -45,6 +45,7 @@ import com.tm.blplayer.utils.Settings;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -159,6 +160,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
 
         initBackground();
         initRenders();
+        initHeaders();
 
         mVideoWidth = 0;
         mVideoHeight = 0;
@@ -246,6 +248,16 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
     }
 
     /**
+     * 目地是为了解决403问题
+     */
+    private void initHeaders() {
+        mHeaders = new HashMap<>();
+        mHeaders.put("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36");
+        mHeaders.put("referer", "https://www.bilibili.com");
+        mHeaders.put("Upgrade-Insecure-Requests", "1");
+    }
+
+    /**
      * Sets video path.
      *
      * @param path the path of the video.
@@ -260,22 +272,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
      * @param uri the URI of the video.
      */
     public void setVideoURI(Uri uri) {
-        setVideoURI(uri, null);
-    }
-
-    /**
-     * Sets video URI using specific headers.
-     *
-     * @param uri     the URI of the video.
-     * @param headers the headers for the URI request.
-     *                Note that the cross domain redirection is allowed by default, but that can be
-     *                changed with key/value pairs through the headers parameter with
-     *                "android-allow-cross-domain-redirect" as the key and "0" or "1" as the value
-     *                to disallow or allow cross domain redirection.
-     */
-    private void setVideoURI(Uri uri, Map<String, String> headers) {
         mUri = uri;
-        mHeaders = headers;
         mSeekWhenPrepared = 0;
         openVideo();
         requestLayout();

@@ -30,7 +30,6 @@ class NetworkObserver(@NonNull private val mOnNetworkCallBackListener: OnNetwork
         if (baseBean != null) {
             val code = baseBean.code
             if (code == Constants.REQUEST_SUCCEED) {
-
                 mOnNetworkCallBackListener.onNetworkRequestSuccess(baseBean)
             } else {
                 mOnNetworkCallBackListener.onNetworkRequestFailed(code, baseBean.message)

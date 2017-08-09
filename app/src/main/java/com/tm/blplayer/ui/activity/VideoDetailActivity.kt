@@ -116,7 +116,6 @@ class VideoDetailActivity : BaseActivity(), BaseView {
     }
 
     override fun initData() {
-
     }
 
     /**
@@ -170,8 +169,6 @@ class VideoDetailActivity : BaseActivity(), BaseView {
             if (mCurrentUrlIndex < size ?: Int.MIN_VALUE) {
                 playUrl = mData?.video_info?.url_list?.get(mCurrentUrlIndex++)
                 video_view.setVideoPath(playUrl)
-                // TODO: 2017/6/9 视频防盗链
-                Logger.d("next url = " + playUrl)
             } else {
                 ToastUtils.showShortToast(this@VideoDetailActivity, getString(R.string.video_detail_parse_failed))
             }

@@ -2,7 +2,6 @@ package com.tm.blplayer.ui.activity
 
 import android.os.Build
 import android.view.View
-import com.orhanobut.logger.Logger
 import com.tencent.smtt.export.external.interfaces.WebResourceError
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest
 import com.tencent.smtt.sdk.WebChromeClient
@@ -27,8 +26,6 @@ class WebViewActivity : BaseActivity() {
         ll_back.visibility = View.VISIBLE
         tv_back_title.text = getString(R.string.web_view_loading)
 
-        web_view.settings.defaultTextEncodingName = "utf-8"
-        web_view.settings.javaScriptCanOpenWindowsAutomatically = true
         web_view.setWebViewClient(object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 view.loadUrl(url)
@@ -36,12 +33,12 @@ class WebViewActivity : BaseActivity() {
             }
 
             override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
-                tv_back_title.text = getString(R.string.web_view_load_error)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (error.description == "net::ERR_CONNECTION_REFUSED") {
                         return
                     }
                 }
+                tv_back_title.text = getString(R.string.web_view_load_error)
             }
         })
         web_view.setWebChromeClient(object : WebChromeClient() {
@@ -51,7 +48,6 @@ class WebViewActivity : BaseActivity() {
                 if (newProgress >= 100) {
                     pb_loading.visibility = View.GONE
                 }
-                Logger.d("progress = " + newProgress)
             }
 
             override fun onReceivedTitle(view: WebView, title: String) {
@@ -61,7 +57,9 @@ class WebViewActivity : BaseActivity() {
         })
 
         web_view.settings.javaScriptEnabled = true
+        web_view.settings.defaultTextEncodingName = "utf-8"
         web_view.settings.javaScriptCanOpenWindowsAutomatically = true
+        web_view.settings.setAppCacheEnabled(true)
         web_view.settings.allowContentAccess = true
         web_view.settings.setAllowUniversalAccessFromFileURLs(true)
         web_view.settings.mixedContentMode = android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
