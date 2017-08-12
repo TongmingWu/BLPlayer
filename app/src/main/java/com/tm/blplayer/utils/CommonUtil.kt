@@ -379,12 +379,6 @@ class CommonUtil {
             return frame.top
         }
 
-        //获取状态栏高度＋标题栏(ActionBar)高度
-        fun getTopBarHeight(activity: Activity): Int {
-            return activity.window.findViewById(Window.ID_ANDROID_CONTENT)
-                    .top
-        }
-
         //获取MCC+MNC代码 (SIM卡运营商国家代码和运营商网络代码)
         fun getNetworkOperator(context: Context): String {
             val telephonyManager = context

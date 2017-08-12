@@ -3,12 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "com.tm.blplayer"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -47,11 +47,11 @@ dependencies {
     })
     compile project(':libraries:BannerLayout')
     compile project(':libraries:TagFlowLayout')
-    compile 'com.android.support:appcompat-v7:25.1.1'
-    compile 'com.android.support:design:25.1.1'
+    compile 'com.android.support:appcompat-v7:26+'
+    compile 'com.android.support:design:26+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:cardview-v7:25.1.1'
-    compile 'com.android.support:recyclerview-v7:25.1.1'
+    compile 'com.android.support:cardview-v7:26+'
+    compile 'com.android.support:recyclerview-v7:26+'
     testCompile 'junit:junit:4.12'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.google.code.gson:gson:2.8.0'
@@ -60,7 +60,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.3'
     //rx事件总线
     compile 'com.hwangjr.rxbus:rxbus:1.0.5'
     //rx生命周期绑定
@@ -89,7 +89,7 @@ dependencies {
     //logger
     compile 'com.orhanobut:logger:1.15'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation files('libs/tbs_sdk_thirdapp_v3.1.0.1034_43100_sharewithdownload_obfs_20170301_182143.jar')
+    implementation files('libs/com_tencent_smtt_sdk_webview.jar')
 }
 repositories {
     mavenCentral()

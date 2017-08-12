@@ -1,11 +1,14 @@
 package com.tm.blplayer.ui.activity
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.view.View
 import com.jakewharton.rxbinding.view.RxView
 import com.orhanobut.logger.Logger
 import com.tm.blplayer.R
+import com.tm.blplayer.R.id.fab_play
 import com.tm.blplayer.base.BaseActivity
 import com.tm.blplayer.base.BaseFragment
 import com.tm.blplayer.bean.VideoDetailData
@@ -25,6 +28,12 @@ import tv.danmaku.ijk.media.player.IjkMediaPlayer
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+private val objectAnimator: ObjectAnimator?
+    get() {
+        val upAnim = ObjectAnimator.ofFloat(fab_play, "scale", 0.0f, 1.0f)
+        return upAnim
+    }
+
 /**
  * @author wutongming
  * @description
@@ -36,13 +45,19 @@ class VideoDetailActivity : BaseActivity(), BaseView {
     private var mVideoDetailPresenter: VideoDetailPresenter? = null
     private var mData: VideoDetailData? = null
     private val fragments = arrayOfNulls<BaseFragment>(2)
-    private var fabSize: Int = 0
     private var mediaController: AndroidMediaController? = null
     private var playUrl: String? = null
     private var mBackPressed: Boolean = false
     private var deviceWidth: Int = 0
     private var mCurrentUrlIndex: Int = 0
     private var mCurrentPlayPosition: Int = 0
+
+    //动画
+    private var playAnimSet: AnimatorSet? = null
+    private var upAnim: ObjectAnimator? = null
+    private var downAnim: ObjectAnimator? = null
+    private var showAnim: ObjectAnimator? = null
+    private var hideAnim: ObjectAnimator? = null
 
     override val layoutId: Int
         get() = R.layout.activity_video_detail
@@ -62,7 +77,12 @@ class VideoDetailActivity : BaseActivity(), BaseView {
         aid = intent.getStringExtra(Constants.VIDEO_AID)
         tv_back_title.text = resources.getString(R.string.video_detail_av, aid.toString())
         common_toolbar.setBackgroundColor(resources.getColor(R.color.transparent))
-        fabSize = CommonUtil.dip2px(this, 60f)
+
+        initAppBar()
+    }
+
+    private fun initAppBar() {
+        val fabSize = CommonUtil.dip2px(this, 60f)
         app_bar.addOnOffsetChangedListener({ appBarLayout, verticalOffset ->
             val totalScrollRange = app_bar.totalScrollRange.toFloat()
             val offset = Math.abs(verticalOffset).toFloat()
@@ -77,6 +97,7 @@ class VideoDetailActivity : BaseActivity(), BaseView {
                     tv_back_title.visibility = View.GONE
                     ll_play.visibility = View.VISIBLE
                     fab_play.visibility = View.GONE
+//                    startPlayAnim(false)
                 } else {
                     common_toolbar?.setBackgroundColor(resources.getColor(R.color.transparent))
                     tv_back_title.visibility = View.VISIBLE
@@ -92,6 +113,7 @@ class VideoDetailActivity : BaseActivity(), BaseView {
         RxView.clicks(fab_play)
                 .throttleFirst(1000, TimeUnit.MILLISECONDS)
                 .subscribe({ playVideo() })
+        initAnim()
     }
 
     private fun initTab() {
@@ -116,6 +138,35 @@ class VideoDetailActivity : BaseActivity(), BaseView {
     }
 
     override fun initData() {
+    }
+
+    /**
+     * 初始化动画
+     */
+    private fun initAnim() {
+        //放大动画
+        upAnim = ObjectAnimator.ofFloat(fab_play, "scale", 0.0f, 1.0f)
+        //缩小动画
+        downAnim = ObjectAnimator.ofFloat(fab_play, "scale", 1.0f, 0.0f)
+        //显示动画
+        showAnim = ObjectAnimator.ofFloat(fab_play, "alpha", 0.0f, 1.0f)
+        //消失动画
+        hideAnim = ObjectAnimator.ofFloat(fab_play, "alpha", 1.0f, 0.0f)
+    }
+
+    /**
+     * 按钮缩放动画
+     */
+    private fun startPlayAnim(shown: Boolean) {
+        playAnimSet = playAnimSet ?: AnimatorSet()
+        playAnimSet?.duration = 500
+        if (shown) {
+            playAnimSet?.playTogether(upAnim, showAnim)
+            playAnimSet?.start()
+        } else {
+            playAnimSet?.playTogether(downAnim, hideAnim)
+            playAnimSet?.start()
+        }
     }
 
     /**
@@ -164,7 +215,6 @@ class VideoDetailActivity : BaseActivity(), BaseView {
 
         video_view?.setOnErrorListener({ iMediaPlayer, i, i1 ->
             //播放失败时重试下一个链接,知道没有链接为止
-            //失败的原因有403
             val size = mData?.video_info?.url_list?.size    //如果中间有空的话则返回Int的最小值,反正不会进入if就可以了
             if (mCurrentUrlIndex < size ?: Int.MIN_VALUE) {
                 playUrl = mData?.video_info?.url_list?.get(mCurrentUrlIndex++)
@@ -241,17 +291,16 @@ class VideoDetailActivity : BaseActivity(), BaseView {
             mBackPressed = false
         } else {
             video_view.enterBackground()
-
         }
         IjkMediaPlayer.native_profileEnd()
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         mVideoDetailPresenter?.onDetach()
         video_view.stopPlayback()
         video_view.release(true)
         video_view.stopBackgroundPlay()
         IjkMediaPlayer.native_profileEnd()
+        super.onDestroy()
     }
 }

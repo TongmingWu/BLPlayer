@@ -1,5 +1,6 @@
 package com.tm.blplayer
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import com.tencent.smtt.sdk.QbSdk
@@ -28,6 +29,7 @@ class BLApplication : Application() {
 
     companion object {
 
+        @SuppressLint("StaticFieldLeak")
         var instance: Context? = null
     }
 }

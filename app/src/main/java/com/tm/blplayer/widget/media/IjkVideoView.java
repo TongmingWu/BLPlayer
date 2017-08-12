@@ -149,11 +149,6 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
         initVideoView(context);
     }
 
-    // REMOVED: onMeasure
-    // REMOVED: onInitializeAccessibilityEvent
-    // REMOVED: onInitializeAccessibilityNodeInfo
-    // REMOVED: resolveAdjustedSize
-
     private void initVideoView(Context context) {
         mAppContext = context.getApplicationContext();
         mSettings = new Settings(mAppContext);
@@ -164,12 +159,11 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
 
         mVideoWidth = 0;
         mVideoHeight = 0;
-        // REMOVED: getHolder().addCallback(mSHCallback);
-        // REMOVED: getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+
         setFocusable(true);
         setFocusableInTouchMode(true);
         requestFocus();
-        // REMOVED: mPendingSubtitleTracks = new Vector<Pair<InputStream, MediaFormat>>();
+
         mCurrentState = STATE_IDLE;
         mTargetState = STATE_IDLE;
 
@@ -279,9 +273,6 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
         invalidate();
     }
 
-    // REMOVED: addSubtitleSource
-    // REMOVED: mPendingSubtitleTracks
-
     public void stopPlayback() {
         if (mMediaPlayer != null) {
             mMediaPlayer.stop();
@@ -315,9 +306,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
             // TODO: create SubtitleController in MediaPlayer, but we need
             // a context for the subtitle renderers
             final Context context = getContext();
-            // REMOVED: SubtitleController
 
-            // REMOVED: mAudioSession
             mMediaPlayer.setOnPreparedListener(mPreparedListener);
             mMediaPlayer.setOnVideoSizeChangedListener(mSizeChangedListener);
             mMediaPlayer.setOnCompletionListener(mCompletionListener);
@@ -346,8 +335,6 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
             if (mHudViewHolder != null)
                 mHudViewHolder.setMediaPlayer(mMediaPlayer);
 
-            // REMOVED: mPendingSubtitleTracks
-
             // we don't set the target state here either, but preserve the
             // target state that was there before.
             mCurrentState = STATE_PREPARING;
@@ -363,7 +350,6 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
             mTargetState = STATE_ERROR;
             mErrorListener.onError(mMediaPlayer, MediaPlayer.MEDIA_ERROR_UNKNOWN, 0);
         } finally {
-            // REMOVED: mPendingSubtitleTracks.clear();
         }
     }
 
@@ -397,7 +383,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
                             mRenderView.setVideoSize(mVideoWidth, mVideoHeight);
                             mRenderView.setVideoSampleAspectRatio(mVideoSarNum, mVideoSarDen);
                         }
-                        // REMOVED: getHolder().setFixedSize(mVideoWidth, mVideoHeight);
+
                         requestLayout();
                     }
                 }
@@ -412,7 +398,6 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
             mCurrentState = STATE_PREPARED;
 
             // Get the capabilities of the player for this stream
-            // REMOVED: Metadata
 
             if (mOnPreparedListener != null) {
                 mOnPreparedListener.onPrepared(mMediaPlayer);
@@ -428,8 +413,6 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
                 seekTo(seekToPosition);
             }
             if (mVideoWidth != 0 && mVideoHeight != 0) {
-                //Log.i("@@@@", "video size: " + mVideoWidth +"/"+ mVideoHeight);
-                // REMOVED: getHolder().setFixedSize(mVideoWidth, mVideoHeight);
                 if (mRenderView != null) {
                     mRenderView.setVideoSize(mVideoWidth, mVideoHeight);
                     mRenderView.setVideoSampleAspectRatio(mVideoSarNum, mVideoSarDen);
@@ -543,37 +526,6 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
                         }
                     }
 
-                    /* Otherwise, pop up an error dialog so the user knows that
-                     * something bad has happened. Only try and pop up the dialog
-                     * if we're attached to a window. When we're going away and no
-                     * longer have a window, don't bother showing the user an error.
-                     */
-                    /*if (getWindowToken() != null) {
-                        Resources r = mAppContext.getResources();
-                        int messageId;
-
-                        if (framework_err == MediaPlayer.MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK) {
-                            messageId = R.string.VideoView_error_text_invalid_progressive_playback;
-                        } else {
-                            messageId = R.string.VideoView_error_text_unknown;
-                        }
-
-                        new AlertDialog.Builder(getContext())
-                                .setMessage(messageId)
-                                .setPositiveButton(R.string.VideoView_error_button,
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int whichButton) {
-                                            *//* If we get here, there is no onError listener, so
-                                             * at least inform them that the video is over.
-                                             *//*
-                                                if (mOnCompletionListener != null) {
-                                                    mOnCompletionListener.onCompletion(mMediaPlayer);
-                                                }
-                                            }
-                                        })
-                                .setCancelable(false)
-                                .show();
-                    }*/
                     return true;
                 }
             };
@@ -704,8 +656,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
 
             // after we return from this we can't use the surface any more
             mSurfaceHolder = null;
-            // REMOVED: if (mMediaController != null) mMediaController.hide();
-            // REMOVED: release(true);
+
             releaseWithoutStop();
         }
     };
@@ -723,13 +674,15 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
             mMediaPlayer.reset();
             mMediaPlayer.release();
             mMediaPlayer = null;
-            // REMOVED: mPendingSubtitleTracks.clear();
+
             mCurrentState = STATE_IDLE;
             if (cleartargetstate) {
                 mTargetState = STATE_IDLE;
             }
             AudioManager am = (AudioManager) mAppContext.getSystemService(Context.AUDIO_SERVICE);
-            am.abandonAudioFocus(null);
+            if (am != null) {
+                am.abandonAudioFocus(null);
+            }
         }
     }
 
@@ -894,19 +847,6 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
         return 0;
     }
 
-    // REMOVED: getAudioSessionId();
-    // REMOVED: onAttachedToWindow();
-    // REMOVED: onDetachedFromWindow();
-    // REMOVED: onLayout();
-    // REMOVED: draw();
-    // REMOVED: measureAndLayoutSubtitleWidget();
-    // REMOVED: setSubtitleWidget();
-    // REMOVED: getSubtitleLooper();
-
-    //-------------------------
-    // Extend: Aspect Ratio
-    //-------------------------
-
     private static final int[] s_allAspectRatio = {
             IRenderView.AR_ASPECT_FIT_PARENT,
             IRenderView.AR_ASPECT_FILL_PARENT,
@@ -943,7 +883,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
 
         if (mSettings.getEnableSurfaceView())
             mAllRenders.add(RENDER_SURFACE_VIEW);
-        if (mSettings.getEnableTextureView() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+        if (mSettings.getEnableTextureView())
             mAllRenders.add(RENDER_TEXTURE_VIEW);
         if (mSettings.getEnableNoView())
             mAllRenders.add(RENDER_NONE);
