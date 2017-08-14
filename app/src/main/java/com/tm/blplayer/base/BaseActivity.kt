@@ -63,7 +63,7 @@ abstract class BaseActivity : RxAppCompatActivity(), View.OnClickListener {
      * 添加订阅事件
      */
     protected fun addToSubscriptions(subscription: Subscription) {
-        subscriptionList ?: ArrayList()
+        subscriptionList = subscriptionList ?: ArrayList()
         subscriptionList?.let {
             subscriptionList?.add(subscription)
         }
