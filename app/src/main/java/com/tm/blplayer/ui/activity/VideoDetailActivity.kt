@@ -8,7 +8,6 @@ import android.view.View
 import com.jakewharton.rxbinding.view.RxView
 import com.orhanobut.logger.Logger
 import com.tm.blplayer.R
-import com.tm.blplayer.R.id.fab_play
 import com.tm.blplayer.base.BaseActivity
 import com.tm.blplayer.base.BaseFragment
 import com.tm.blplayer.bean.VideoDetailData
@@ -27,12 +26,6 @@ import kotlinx.android.synthetic.main.include_video_detail_top.*
 import tv.danmaku.ijk.media.player.IjkMediaPlayer
 import java.util.*
 import java.util.concurrent.TimeUnit
-
-private val objectAnimator: ObjectAnimator?
-    get() {
-        val upAnim = ObjectAnimator.ofFloat(fab_play, "scale", 0.0f, 1.0f)
-        return upAnim
-    }
 
 /**
  * @author wutongming

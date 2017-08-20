@@ -1,6 +1,7 @@
 package com.tm.blplayer.utils
 
 import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * @author wutongming
@@ -43,7 +44,7 @@ object TimeUtils {
     fun formatStringTime(time: String): String {
         var result = time
         try {
-            val format = SimpleDateFormat("yyyy-MM-dd HH:mm")
+            val format = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA)
             val t = format.parse(time).time
             val currentTime = System.currentTimeMillis()
             val duration = currentTime - t

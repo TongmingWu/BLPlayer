@@ -40,7 +40,7 @@ class VideoDescriptionFragment : BaseFragment() {
         tv_desc.text = data?.desc
         val playInfo = data?.play_info
         val authorInfo = data?.author_info
-        if (playInfo != null) {
+        playInfo?.let {
             val viewCount = playInfo.view
             val danmakuCount = playInfo.danmaku
             val shareCount = playInfo.share
@@ -53,7 +53,7 @@ class VideoDescriptionFragment : BaseFragment() {
             tv_coin.text = if (coinCount > 10000) resources.getString(R.string.home_video_count, StringUtils.DecimalFormat(coinCount)) else coinCount.toString()
             tv_collect.text = if (favoriteCount > 10000) resources.getString(R.string.home_video_count, StringUtils.DecimalFormat(favoriteCount)) else favoriteCount.toString()
         }
-        if (authorInfo != null) {
+        authorInfo?.let {
             Glide.with(activity).load(authorInfo.card.face).transform(GlideCircleTransform(activity)).into(iv_avatar)
             tv_author.text = authorInfo.card.name
             tv_up_time.text = resources.getString(R.string.video_detail_up_time, TimeUtils.formatStringTime(data.create_time))
