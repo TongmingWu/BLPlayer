@@ -27,7 +27,7 @@ object TimeUtils {
         val minutes = time / 60
         val second = time % 60
         if (minutes < 1) {
-            sb.append("00:").append(minutes)
+            sb.append("00:").append(second)
         } else if (minutes < 10) {
             sb.append("0").append(minutes).append(":").append(if (second < 10) "0" + second else second)
         } else {

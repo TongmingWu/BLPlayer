@@ -6,12 +6,10 @@
       <module fileurl="file://D:\AndroidStudioProjects\BLPlayer\.idea\BLPlayer.iml" filepath="D:\AndroidStudioProjects\BLPlayer\.idea\BLPlayer.iml" />
       <module fileurl="file://C:\Users\10695\StudioProjects\BLPlayer\BLPlayer.iml" filepath="C:\Users\10695\StudioProjects\BLPlayer\BLPlayer.iml" />
       <module fileurl="file://D:\AndroidStudioProjects\BLPlayer\libraries\BannerLayout\BannerLayout.iml" filepath="D:\AndroidStudioProjects\BLPlayer\libraries\BannerLayout\BannerLayout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libraries/BannerLayout/BannerLayout.iml" filepath="$PROJECT_DIR$/libraries/BannerLayout/BannerLayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/TagFlowLayout/TagFlowLayout.iml" filepath="$PROJECT_DIR$/libraries/TagFlowLayout/TagFlowLayout.iml" />
-      <module fileurl="file://D:\AndroidStudioProjects\BLPlayer\libraries\TagFlowLayout\TagFlowLayout.iml" filepath="D:\AndroidStudioProjects\BLPlayer\libraries\TagFlowLayout\TagFlowLayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\AndroidStudioProjects\BLPlayer\app\app.iml" filepath="D:\AndroidStudioProjects\BLPlayer\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/libraries.iml" filepath="$PROJECT_DIR$/libraries/libraries.iml" />
-      <module fileurl="file://D:\AndroidStudioProjects\BLPlayer\libraries\libraries.iml" filepath="D:\AndroidStudioProjects\BLPlayer\libraries\libraries.iml" />
     </modules>
   </component>
 </project>
