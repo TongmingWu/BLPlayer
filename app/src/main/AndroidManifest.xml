@@ -39,7 +39,7 @@
         <!--Glide缓存设置-->
         <meta-data
             android:name="com.tm.blplayer.widget.GlideCacheModule"
-            android:value="GlideModule" />
+            android:value="AppGlideModule" />
     </application>
 
 </manifest>

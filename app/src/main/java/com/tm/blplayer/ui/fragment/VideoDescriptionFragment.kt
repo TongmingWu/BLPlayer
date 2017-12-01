@@ -4,7 +4,6 @@ import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.tm.blplayer.R
 import com.tm.blplayer.base.BaseFragment
 import com.tm.blplayer.bean.VideoDetailData
@@ -12,10 +11,10 @@ import com.tm.blplayer.bean.VideoItem
 import com.tm.blplayer.listener.OnItemClickListener
 import com.tm.blplayer.ui.activity.VideoDetailActivity
 import com.tm.blplayer.ui.adapter.VideoCardAdapter
+import com.tm.blplayer.utils.GlideUtils
 import com.tm.blplayer.utils.StringUtils
 import com.tm.blplayer.utils.TimeUtils
 import com.tm.blplayer.utils.constants.Constants
-import com.tm.blplayer.widget.GlideCircleTransform
 import com.zhy.view.flowlayout.FlowLayout
 import com.zhy.view.flowlayout.TagAdapter
 import kotlinx.android.synthetic.main.include_desc_bottom.*
@@ -54,7 +53,7 @@ class VideoDescriptionFragment : BaseFragment() {
             tv_collect.text = if (favoriteCount > 10000) resources.getString(R.string.home_video_count, StringUtils.DecimalFormat(favoriteCount)) else favoriteCount.toString()
         }
         authorInfo?.let {
-            Glide.with(activity).load(authorInfo.card.face).transform(GlideCircleTransform(activity)).into(iv_avatar)
+            GlideUtils.loadCircleImage(activity,authorInfo.card.face,iv_avatar)
             tv_author.text = authorInfo.card.name
             tv_up_time.text = resources.getString(R.string.video_detail_up_time, TimeUtils.formatStringTime(data.create_time))
         }

@@ -155,7 +155,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
 
         initBackground();
         initRenders();
-        initHeaders();
+        addHttpHeader();
 
         mVideoWidth = 0;
         mVideoHeight = 0;
@@ -244,7 +244,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
     /**
      * 目地是为了解决403问题
      */
-    private void initHeaders() {
+    private void addHttpHeader() {
         mHeaders = new HashMap<>();
         mHeaders.put("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36");
         mHeaders.put("referer", "https://www.bilibili.com");

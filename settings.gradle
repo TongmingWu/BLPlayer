@@ -1,3 +1,2 @@
 include ':app'
-include ':libraries:BannerLayout'
 include ':libraries:TagFlowLayout'

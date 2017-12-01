@@ -4,12 +4,11 @@ import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
-
 import com.orhanobut.logger.Logger
 import com.tm.blplayer.R
 import com.tm.blplayer.base.BaseAdapter
-import com.tm.blplayer.bean.VideoItem
 import com.tm.blplayer.base.BaseViewHolder
+import com.tm.blplayer.bean.VideoItem
 import com.tm.blplayer.utils.CommonUtil
 import com.tm.blplayer.utils.GlideUtils
 import com.tm.blplayer.utils.StringUtils

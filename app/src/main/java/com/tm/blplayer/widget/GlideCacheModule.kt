@@ -1,12 +1,9 @@
 package com.tm.blplayer.widget
 
 import android.content.Context
-
-import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory
-import com.bumptech.glide.module.GlideModule
-
+import com.bumptech.glide.module.AppGlideModule
 import java.io.File
 
 /**
@@ -17,16 +14,12 @@ import java.io.File
  * @since 2017/3/2
  */
 
-class GlideCacheModule : GlideModule {
+class GlideCacheModule : AppGlideModule() {
 
     override fun applyOptions(context: Context, builder: GlideBuilder) {
         val file = File(context.externalCacheDir!!.toString() + "/image_disk_cache")
         file.mkdir()
         builder.setDiskCache(ExternalCacheDiskCacheFactory(context, file.name, DEFAULT_CACHE_CEILING))
-    }
-
-    override fun registerComponents(context: Context, glide: Glide) {
-
     }
 
     companion object {

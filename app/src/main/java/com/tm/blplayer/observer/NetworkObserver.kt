@@ -41,14 +41,14 @@ class NetworkObserver(@NonNull private val mOnNetworkCallBackListener: OnNetwork
         Logger.e(e.localizedMessage)
         mOnNetworkCallBackListener.onNetworkRequestError(e.message ?: "")
 
-        if (!(disposable?.isDisposed ?: true)) {
+        if (disposable?.isDisposed == false) {
             disposable?.dispose()
         }
     }
 
     override fun onComplete() {
         Logger.d("onComplete")
-        if (!(disposable?.isDisposed ?: true)) {
+        if (disposable?.isDisposed == false) {
             disposable?.dispose()
         }
     }

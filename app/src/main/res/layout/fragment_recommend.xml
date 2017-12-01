@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.yyydjk.library.BannerLayout
+            <com.tm.blplayer.widget.BannerLayout
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"

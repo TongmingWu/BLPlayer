@@ -1,4 +1,4 @@
-package com.yyydjk.library;
+package com.tm.blplayer.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -22,6 +22,8 @@ import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.tm.blplayer.R;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -297,7 +299,7 @@ public class BannerLayout extends RelativeLayout {
             }
         });
         imageView.setScaleType(getScaleType(imageScaleType));
-        Glide.with(getContext()).load(res).fitCenter().into(imageView);
+        Glide.with(getContext()).load(res).apply(new RequestOptions().fitCenter()).into(imageView);
         return imageView;
     }
 
@@ -337,10 +339,11 @@ public class BannerLayout extends RelativeLayout {
             }
         });
         imageView.setScaleType(getScaleType(imageScaleType));
+        RequestOptions options = new RequestOptions().fitCenter();
         if (defaultImage != 0) {
-            Glide.with(getContext()).load(url).placeholder(defaultImage).fitCenter().into(imageView);
+            Glide.with(getContext()).load(url).apply(options.placeholder(defaultImage)).into(imageView);
         } else {
-            Glide.with(getContext()).load(url).fitCenter().into(imageView);
+            Glide.with(getContext()).load(url).apply(options).into(imageView);
         }
         return imageView;
     }

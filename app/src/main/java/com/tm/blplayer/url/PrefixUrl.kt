@@ -12,7 +12,7 @@ object PrefixUrl {
     /**
      * 测试地址
      */
-    //    val BASE_URL = "http://192.168.84.45:5000"
+//        val BASE_URL = "http://192.168.84.13:5000"
     val BASE_URL = "http://39.108.164.40"
 
     /**
